@@ -1,40 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Store.css';
 
 const Store = () => {
-    const [products] = useState([
-        {
-            id: 1,
-            name: "Midnight Rose",
-            price: 99.99,
-            description: "A luxurious blend of rose and vanilla with deep woody undertones",
-            image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            category: "Women"
-        },
-        {
-            id: 2,
-            name: "Ocean Breeze",
-            price: 149.99,
-            description: "Fresh and invigorating with notes of sea salt and citrus",
-            image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            category: "Unisex"
-        },
-        {
-            id: 3,
-            name: "Royal Oud",
-            price: 199.99,
-            description: "Rich and sophisticated with authentic Oud wood essence",
-            image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            category: "Men"
-        }
-    ]);
+    const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filter, setFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [sortBy, setSortBy] = useState('featured');
+
+    // Initialize default products if none exist
+    const initializeDefaultProducts = () => {
+        const defaultProducts = [
+            {
+                id: 1,
+                name: "Midnight Rose",
+                price: 99.99,
+                description: "A luxurious blend of rose and vanilla with deep woody undertones",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "Women"
+            },
+            {
+                id: 2,
+                name: "Ocean Breeze",
+                price: 149.99,
+                description: "Fresh and invigorating with notes of sea salt and citrus",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "Unisex"
+            },
+            {
+                id: 3,
+                name: "Royal Oud",
+                price: 199.99,
+                description: "Rich and sophisticated with authentic Oud wood essence",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "Men"
+            },
+            {
+                id: 4,
+                name: "Vanilla Dreams",
+                price: 89.99,
+                description: "Sweet and comforting with Madagascar vanilla and warm spices",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "Women"
+            },
+            {
+                id: 5,
+                name: "Mountain Pine",
+                price: 129.99,
+                description: "Fresh and woody with notes of pine and cedar",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "Men"
+            },
+            {
+                id: 6,
+                name: "Citrus Splash",
+                price: 79.99,
+                description: "Bright and energetic with orange and lemon notes",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "Unisex"
+            }
+        ];
+
+        localStorage.setItem('products', JSON.stringify(defaultProducts));
+        setProducts(defaultProducts);
+    };
+
+    // Load products from localStorage or initialize defaults
+    useEffect(() => {
+        const savedProducts = JSON.parse(localStorage.getItem('products'));
+        if (savedProducts && savedProducts.length > 0) {
+            setProducts(savedProducts);
+        } else {
+            initializeDefaultProducts();
+        }
+    }, []);
 
     const filteredProducts = products.filter(product => {
         const matchesFilter = filter === 'all' || product.category === filter;

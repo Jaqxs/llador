@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Admin.css';
 
 const Admin = () => {
@@ -13,8 +14,7 @@ const Admin = () => {
         price: '',
         description: '',
         image: '',
-        category: 'Unisex',
-        stock: 0
+        category: 'perfumes'
     });
     const [credentials, setCredentials] = useState({
         username: '',
@@ -24,11 +24,10 @@ const Admin = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [analytics, setAnalytics] = useState({
-        totalSales: 0,
+        totalProducts: 0,
         totalOrders: 0,
-        averageOrderValue: 0,
-        topProducts: [],
-        recentOrders: []
+        totalRevenue: 0,
+        averageOrderValue: 0
     });
 
     useEffect(() => {
@@ -46,32 +45,16 @@ const Admin = () => {
     }, []);
 
     const calculateAnalytics = (ordersData) => {
-        const totalSales = ordersData.reduce((sum, order) => sum + order.total, 0);
-        const totalOrders = ordersData.length;
-        const averageOrderValue = totalOrders > 0 ? totalSales / totalOrders : 0;
-
-        // Calculate top products
-        const productSales = {};
-        ordersData.forEach(order => {
-            order.items.forEach(item => {
-                productSales[item.id] = (productSales[item.id] || 0) + item.quantity;
-            });
-        });
-
-        const topProducts = Object.entries(productSales)
-            .map(([id, quantity]) => {
-                const product = products.find(p => p.id === parseInt(id));
-                return { ...product, quantity };
-            })
-            .sort((a, b) => b.quantity - a.quantity)
-            .slice(0, 5);
+        const totalProducts = products.length;
+        const totalOrders = products.reduce((sum, product) => sum + (product.orders || 0), 0);
+        const totalRevenue = products.reduce((sum, product) => sum + (product.revenue || 0), 0);
+        const averageOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
         setAnalytics({
-            totalSales,
+            totalProducts,
             totalOrders,
-            averageOrderValue,
-            topProducts,
-            recentOrders: ordersData.slice(-5)
+            totalRevenue,
+            averageOrderValue
         });
     };
 
@@ -105,7 +88,7 @@ const Admin = () => {
             price: '',
             description: '',
             image: '',
-            category: 'Unisex',
+            category: 'perfumes',
             stock: 0
         });
     };
@@ -137,7 +120,7 @@ const Admin = () => {
             price: '',
             description: '',
             image: '',
-            category: 'Unisex',
+            category: 'perfumes',
             stock: 0
         });
     };
@@ -302,7 +285,7 @@ const Admin = () => {
                                             price: '',
                                             description: '',
                                             image: '',
-                                            category: 'Unisex',
+                                            category: 'perfumes',
                                             stock: 0
                                         });
                                     }}>
@@ -421,48 +404,20 @@ const Admin = () => {
                     <div className="analytics-dashboard">
                         <div className="analytics-grid">
                             <div className="analytics-card">
-                                <h3>Total Sales</h3>
-                                <p className="analytics-value">${analytics.totalSales.toFixed(2)}</p>
+                                <h3>Total Products</h3>
+                                <p className="analytics-value">{analytics.totalProducts}</p>
                             </div>
                             <div className="analytics-card">
                                 <h3>Total Orders</h3>
                                 <p className="analytics-value">{analytics.totalOrders}</p>
                             </div>
                             <div className="analytics-card">
+                                <h3>Total Revenue</h3>
+                                <p className="analytics-value">${analytics.totalRevenue.toFixed(2)}</p>
+                            </div>
+                            <div className="analytics-card">
                                 <h3>Average Order Value</h3>
                                 <p className="analytics-value">${analytics.averageOrderValue.toFixed(2)}</p>
-                            </div>
-                        </div>
-
-                        <div className="analytics-section">
-                            <h3>Top Products</h3>
-                            <div className="top-products-grid">
-                                {analytics.topProducts.map(product => (
-                                    <div key={product.id} className="top-product-card">
-                                        <img src={product.image} alt={product.name} />
-                                        <div className="top-product-info">
-                                            <h4>{product.name}</h4>
-                                            <p>Sold: {product.quantity} units</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="analytics-section">
-                            <h3>Recent Orders</h3>
-                            <div className="recent-orders-list">
-                                {analytics.recentOrders.map(order => (
-                                    <div key={order.id} className="recent-order-item">
-                                        <div>
-                                            <p>Order #{order.id}</p>
-                                            <p>${order.total}</p>
-                                        </div>
-                                        <span className={`order-status ${order.status.toLowerCase()}`}>
-                                            {order.status}
-                                        </span>
-                                    </div>
-                                ))}
                             </div>
                         </div>
                     </div>
