@@ -194,7 +194,7 @@ const Store = () => {
 
     const handleWhatsAppOrder = (product) => {
         const message = `Hello, I'd like to order ${product.name} priced at $${product.price} from Llador Store TZ`;
-        const whatsappUrl = `https://wa.me/+255123456789?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me/+255746718133?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     };
 

@@ -27,12 +27,6 @@ const Admin = () => {
         averageOrderValue: 0
     });
 
-    // Load products from localStorage
-    useEffect(() => {
-        const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
-        setProducts(savedProducts);
-    }, []);
-
     const calculateAnalytics = useCallback(() => {
         const totalProducts = products.length;
         const totalOrders = products.reduce((sum, product) => sum + (product.orders || 0), 0);
@@ -46,6 +40,12 @@ const Admin = () => {
             averageOrderValue
         });
     }, [products]);
+
+    // Load products from localStorage
+    useEffect(() => {
+        const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
+        setProducts(savedProducts);
+    }, []);
 
     // Calculate analytics whenever products change
     useEffect(() => {

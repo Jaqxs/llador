@@ -53,18 +53,8 @@ const About = () => {
                     <div className="team-grid">
                         <div className="team-member">
                             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member 1" />
-                            <h3>John Doe</h3>
+                            <h3>Winy </h3>
                             <p>Founder & CEO</p>
-                        </div>
-                        <div className="team-member">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member 2" />
-                            <h3>Jane Smith</h3>
-                            <p>Fragrance Expert</p>
-                        </div>
-                        <div className="team-member">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member 3" />
-                            <h3>Mike Johnson</h3>
-                            <p>Customer Relations</p>
                         </div>
                     </div>
                 </div>
@@ -78,7 +68,7 @@ const About = () => {
                         </div>
                         <div className="contact-item">
                             <h3>Phone</h3>
-                            <p>+255 123 456 789</p>
+                            <p>+255746718133</p>
                         </div>
                         <div className="contact-item">
                             <h3>Email</h3>
