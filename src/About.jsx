@@ -7,97 +7,80 @@ import './About.css';
 
 const About = () => {
     const headerRef = useScrollReveal(0.5);
-    const ceoRef = useScrollReveal(0.3);
+    const storyRef = useScrollReveal(0.3);
+    const teamRef = useScrollReveal(0.3);
     const valuesRef = useScrollReveal(0.3);
-    const contactRef = useScrollReveal(0.3);
 
     return (
         <div className="about-container">
             <Navigation activePage="about" />
             
-            <section className="about-hero scroll-reveal" ref={headerRef}>
-                <div className="hero-content animate-fade-in">
-                    <h1 className="animate-fade-in-up">About Llador Store TZ</h1>
-                    <p className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                        Your destination for luxury fragrances in Tanzania
-                    </p>
-                    <div className="scroll-indicator animate-bounce">
-                        <span>Scroll Down</span>
-                        <div className="scroll-arrow"></div>
-                    </div>
+            {/* Header Section */}
+            <section className="about-header scroll-reveal" ref={headerRef}>
+                <div className="container">
+                    <h1 className="animate-fade-in">About Llador</h1>
+                    <p className="animate-fade-in-up">Discover our story and mission</p>
                 </div>
             </section>
 
-            <section className="about-section scroll-reveal" ref={ceoRef}>
+            {/* Our Story Section */}
+            <section className="story-section scroll-reveal" ref={storyRef}>
                 <div className="container">
-                    <div className="ceo-section">
-                        <div className="ceo-image-container">
-                            <img
-                                src="images/winy.jpg"
-                                alt="CEO of Llador Store TZ"
-                                className="ceo-image"
+                    <div className="story-content">
+                        <div className="story-text animate-fade-in-up">
+                            <h2>Our Story</h2>
+                            <p>Founded in 2024, Llador has been at the forefront of luxury fragrances in Tanzania. Our journey began with a simple mission: to provide high-quality perfumes that enhance the natural beauty of our customers.</p>
+                            <p>Today, we're proud to offer a curated collection of premium fragrances that combine traditional craftsmanship with modern innovation.</p>
+                        </div>
+                        <div className="story-image animate-fade-in">
+                            <img 
+                                src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                alt="Our Story" 
                             />
                         </div>
-                        <div className="ceo-message">
-                            <h2>Our Story</h2>
-                            <p>
-                                Welcome to Llador Store TZ, where luxury meets authenticity. 
-                                Founded with a passion for bringing the finest fragrances to Tanzania, 
-                                we curate a collection that represents the epitome of elegance and sophistication.
-                            </p>
-                            <p>
-                                Our journey began with a simple vision: to provide our customers with 
-                                access to world-class perfumes that enhance their natural beauty and 
-                                reflect their unique personality.
-                            </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Team Section */}
+            <section className="team-section scroll-reveal" ref={teamRef}>
+                <div className="container">
+                    <h2 className="text-center animate-fade-in-up">Our Team</h2>
+                    <div className="team-grid">
+                        <div className="team-member animate-fade-in-up">
+                            <div className="member-image">
+                                <img 
+                                    src={winyImage} 
+                                    alt="CEO of Llador Store TZ" 
+                                    className="ceo-image"
+                                />
+                            </div>
+                            <div className="member-info">
+                                <h3>Winy</h3>
+                                <p>CEO & Founder</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            {/* Values Section */}
             <section className="values-section scroll-reveal" ref={valuesRef}>
                 <div className="container">
-                    <h2 className="text-center">Our Values</h2>
+                    <h2 className="text-center animate-fade-in-up">Our Values</h2>
                     <div className="values-grid">
-                        <div className="value-card">
-                            <div className="value-icon">✨</div>
+                        <div className="value-card animate-fade-in-up">
                             <h3>Quality</h3>
-                            <p>We offer only the finest fragrances from renowned brands worldwide.</p>
+                            <p>We never compromise on the quality of our products, ensuring each fragrance meets our high standards.</p>
                         </div>
-                        <div className="value-card">
-                            <div className="value-icon">🤝</div>
-                            <h3>Trust</h3>
-                            <p>Building lasting relationships with our customers through transparency and reliability.</p>
+                        <div className="value-card animate-fade-in-up">
+                            <h3>Innovation</h3>
+                            <p>We continuously explore new fragrance combinations and stay ahead of industry trends.</p>
                         </div>
-                        <div className="value-card">
-                            <div className="value-icon">💫</div>
-                            <h3>Excellence</h3>
-                            <p>Committed to providing exceptional service and products.</p>
+                        <div className="value-card animate-fade-in-up">
+                            <h3>Sustainability</h3>
+                            <p>We're committed to environmentally responsible practices in our production and packaging.</p>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="contact-section scroll-reveal" ref={contactRef}>
-                <div className="container">
-                    <h2 className="text-center">Connect With Us</h2>
-                    <div className="social-links">
-                        <a
-                            href="https://instagram.com/llador_store_tz"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-accent social-link"
-                        >
-                            <span>Instagram</span>
-                        </a>
-                        <a
-                            href={`https://wa.me/${process.env.REACT_APP_WHATSAPP_NUMBER}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-accent social-link"
-                        >
-                            <span>WhatsApp</span>
-                        </a>
                     </div>
                 </div>
             </section>

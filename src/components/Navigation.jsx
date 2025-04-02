@@ -1,40 +1,79 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaShoppingCart, FaBars, FaTimes, FaUser } from 'react-icons/fa';
+import '../styles/Navigation.css';
 
 const Navigation = ({ activePage }) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
+    const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        const loadCartCount = () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            setCartCount(cart.length);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        loadCartCount();
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    };
+
+    const navLinks = [
+        { path: '/', label: 'Home' },
+        { path: '/store', label: 'Store' },
+        { path: '/about', label: 'About' },
+        { path: '/contact', label: 'Contact' },
+        { path: '/admin', label: 'Admin' }
+    ];
+
     return (
-        <nav className="nav">
-            <Link to="/" className="nav-brand">
-                <i className="fas fa-spray-can"></i>
-                <span>Llador Store TZ</span>
-            </Link>
-            <div className="nav-links">
-                <Link to="/" className={`nav-link ${activePage === 'home' ? 'active' : ''}`}>
-                    <i className="fas fa-home"></i>
-                    <span>Home</span>
+        <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
+            <div className="nav-container">
+                <Link to="/" className="nav-logo">
+                    Llador
                 </Link>
-                <Link to="/store" className={`nav-link ${activePage === 'store' ? 'active' : ''}`}>
-                    <i className="fas fa-store"></i>
-                    <span>Store</span>
-                </Link>
-                <Link to="/about" className={`nav-link ${activePage === 'about' ? 'active' : ''}`}>
-                    <i className="fas fa-info-circle"></i>
-                    <span>About</span>
-                </Link>
-                <Link to="/contact" className={`nav-link ${activePage === 'contact' ? 'active' : ''}`}>
-                    <i className="fas fa-envelope"></i>
-                    <span>Contact</span>
-                </Link>
-            </div>
-            <div className="nav-actions">
-                <Link to="/wishlist" className="wishlist-link">
-                    <i className="fas fa-heart"></i>
-                    <span className="wishlist-count">0</span>
-                </Link>
-                <Link to="/cart" className="cart-button">
-                    <i className="fas fa-shopping-cart"></i>
-                    <span className="cart-count">0</span>
-                </Link>
+
+                <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
+                    {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+                </button>
+
+                <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
+                    {navLinks.map(link => (
+                        <Link
+                            key={link.path}
+                            to={link.path}
+                            className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+                            onClick={closeMobileMenu}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                </div>
+
+                <div className="nav-actions">
+                    <Link to="/cart" className="cart-icon" onClick={closeMobileMenu}>
+                        <FaShoppingCart />
+                        {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+                    </Link>
+                    <Link to="/admin" className="admin-icon" onClick={closeMobileMenu}>
+                        <FaUser />
+                    </Link>
+                </div>
             </div>
         </nav>
     );
