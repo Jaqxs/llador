@@ -216,13 +216,15 @@ const Store = () => {
                 </div>
                 <div className="nav-actions">
                     <Link to="/wishlist" className="wishlist-link">
-                        Wishlist ({wishlist.length})
+                        <i className="fas fa-heart"></i>
+                        <span className="wishlist-count">{wishlist.length}</span>
                     </Link>
                     <button 
                         className="cart-button"
                         onClick={() => setIsCartOpen(!isCartOpen)}
                     >
-                        Cart ({cart.length})
+                        <i className="fas fa-shopping-cart"></i>
+                        <span className="cart-count">{cart.length}</span>
                     </button>
                 </div>
             </nav>
@@ -245,8 +247,8 @@ const Store = () => {
 
             {/* Products Section with 3D Cards */}
             <section id="products-section" className="products-section">
-                <div className="filters">
-                    <div className="search-sort">
+                <div className="filters-container">
+                    <div className="search-container">
                         <input
                             type="text"
                             placeholder="Search products..."
@@ -254,33 +256,49 @@ const Store = () => {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="search-input"
                         />
-                        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="sort-select">
+                        <i className="fas fa-search search-icon"></i>
+                    </div>
+                    <div className="filters">
+                        <select 
+                            value={filter} 
+                            onChange={(e) => setFilter(e.target.value)}
+                            className="filter-select"
+                        >
+                            <option value="all">All Categories</option>
+                            <option value="men">Men's Perfumes</option>
+                            <option value="women">Women's Perfumes</option>
+                            <option value="unisex">Unisex Fragrances</option>
+                        </select>
+                        <select 
+                            value={selectedPriceRange} 
+                            onChange={(e) => setSelectedPriceRange(e.target.value)}
+                            className="filter-select"
+                        >
+                            <option value="all">All Prices</option>
+                            <option value="under50">Under $50</option>
+                            <option value="50to100">$50 - $100</option>
+                            <option value="over100">Over $100</option>
+                        </select>
+                        <select 
+                            value={selectedRating} 
+                            onChange={(e) => setSelectedRating(e.target.value)}
+                            className="filter-select"
+                        >
+                            <option value="all">All Ratings</option>
+                            <option value="4plus">4+ Stars</option>
+                            <option value="3plus">3+ Stars</option>
+                            <option value="2plus">2+ Stars</option>
+                        </select>
+                        <select 
+                            value={sortBy} 
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className="filter-select"
+                        >
                             <option value="featured">Featured</option>
                             <option value="price-low">Price: Low to High</option>
                             <option value="price-high">Price: High to Low</option>
                             <option value="rating">Highest Rated</option>
                             <option value="reviews">Most Reviewed</option>
-                        </select>
-                    </div>
-                    <div className="filter-group">
-                        <select value={filter} onChange={(e) => setFilter(e.target.value)} className="filter-select">
-                            <option value="all">All Categories</option>
-                            <option value="Men">Men</option>
-                            <option value="Women">Women</option>
-                            <option value="Unisex">Unisex</option>
-                        </select>
-                        <select value={selectedPriceRange} onChange={(e) => setSelectedPriceRange(e.target.value)} className="filter-select">
-                            <option value="all">All Prices</option>
-                            <option value="under50">Under $50</option>
-                            <option value="50to100">$50 - $100</option>
-                            <option value="100to200">$100 - $200</option>
-                            <option value="over200">Over $200</option>
-                        </select>
-                        <select value={selectedRating} onChange={(e) => setSelectedRating(e.target.value)} className="filter-select">
-                            <option value="all">All Ratings</option>
-                            <option value="4.5">4.5+ Stars</option>
-                            <option value="4">4+ Stars</option>
-                            <option value="3">3+ Stars</option>
                         </select>
                     </div>
                 </div>
