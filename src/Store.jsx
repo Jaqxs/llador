@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Store.css';
 
 const Store = () => {
-    const [products, setProducts] = useState([
+    const [products] = useState([
         {
             id: 1,
             name: "Midnight Rose",
