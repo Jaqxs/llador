@@ -50,7 +50,7 @@ const About = () => {
                         <div className="team-member animate-fade-in-up">
                             <div className="member-image">
                                 <img 
-                                    src={winyImage} 
+                                    src="/winy.jpg" 
                                     alt="CEO of Llador Store TZ" 
                                     className="ceo-image"
                                 />
