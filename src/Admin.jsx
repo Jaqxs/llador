@@ -22,22 +22,22 @@ const Admin = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [analytics, setAnalytics] = useState({
         totalProducts: 0,
-        totalOrders: 0,
-        totalRevenue: 0,
-        averageOrderValue: 0
+        averagePrice: 0,
+        totalValue: 0,
+        lowStock: 0
     });
 
     const calculateAnalytics = useCallback(() => {
         const totalProducts = products.length;
-        const totalOrders = products.reduce((sum, product) => sum + (product.orders || 0), 0);
-        const totalRevenue = products.reduce((sum, product) => sum + (product.revenue || 0), 0);
-        const averageOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+        const totalValue = products.reduce((sum, product) => sum + product.price, 0);
+        const averagePrice = totalProducts > 0 ? totalValue / totalProducts : 0;
+        const lowStock = products.filter(product => product.stock < 10).length;
 
         setAnalytics({
             totalProducts,
-            totalOrders,
-            totalRevenue,
-            averageOrderValue
+            averagePrice: averagePrice.toFixed(2),
+            totalValue: totalValue.toFixed(2),
+            lowStock
         });
     }, [products]);
 
@@ -402,16 +402,16 @@ const Admin = () => {
                                 <p className="analytics-value">{analytics.totalProducts}</p>
                             </div>
                             <div className="analytics-card">
-                                <h3>Total Orders</h3>
-                                <p className="analytics-value">{analytics.totalOrders}</p>
+                                <h3>Average Price</h3>
+                                <p className="analytics-value">${analytics.averagePrice}</p>
                             </div>
                             <div className="analytics-card">
-                                <h3>Total Revenue</h3>
-                                <p className="analytics-value">${analytics.totalRevenue.toFixed(2)}</p>
+                                <h3>Total Value</h3>
+                                <p className="analytics-value">${analytics.totalValue}</p>
                             </div>
                             <div className="analytics-card">
-                                <h3>Average Order Value</h3>
-                                <p className="analytics-value">${analytics.averageOrderValue.toFixed(2)}</p>
+                                <h3>Low Stock</h3>
+                                <p className="analytics-value">{analytics.lowStock}</p>
                             </div>
                         </div>
                     </div>

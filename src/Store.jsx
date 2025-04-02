@@ -227,18 +227,23 @@ const Store = () => {
                 </div>
             </nav>
 
-            {/* Hero Section */}
+            {/* Hero Section with 3D Effect */}
             <section className="hero-section">
                 <div className="hero-content">
-                    <h1 className="hero-title">Llador Store TZ</h1>
-                    <p className="hero-tagline">Discover the Essence of Luxury</p>
+                    <div className="hero-3d-container">
+                        <div className="hero-3d-element">
+                            <h1 className="hero-title">Llador Store TZ</h1>
+                            <p className="hero-tagline">Discover the Essence of Luxury</p>
+                        </div>
+                        <div className="hero-3d-background"></div>
+                    </div>
                     <button className="cta-button" onClick={() => document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' })}>
                         Shop Now
                     </button>
                 </div>
             </section>
 
-            {/* Products Section */}
+            {/* Products Section with 3D Cards */}
             <section id="products-section" className="products-section">
                 <div className="filters">
                     <div className="search-sort">
@@ -283,38 +288,40 @@ const Store = () => {
                 <div className="products-grid">
                     {sortedProducts.map(product => (
                         <div key={product.id} className="product-card">
-                            <div className="product-image-container">
-                                <img src={product.image} alt={product.name} className="product-image" />
-                                <div className="product-overlay">
+                            <div className="product-3d-container">
+                                <div className="product-image-container">
+                                    <img src={product.image} alt={product.name} className="product-image" />
+                                    <div className="product-overlay">
+                                        <button 
+                                            className="view-details-btn"
+                                            onClick={() => openProductModal(product)}
+                                        >
+                                            View Details
+                                        </button>
+                                        <button 
+                                            className={`wishlist-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                                            onClick={() => toggleWishlist(product.id)}
+                                        >
+                                            {wishlist.includes(product.id) ? '❤️' : '🤍'}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="product-info">
+                                    <h3>{product.name}</h3>
+                                    <div className="product-rating">
+                                        <span className="stars">{'★'.repeat(Math.floor(product.rating))}{'☆'.repeat(5-Math.floor(product.rating))}</span>
+                                        <span className="reviews">({product.reviews})</span>
+                                    </div>
+                                    <p className="price">${product.price}</p>
+                                    <p className="stock">In Stock: {product.stock}</p>
+                                    <p className="description">{product.description}</p>
                                     <button 
-                                        className="view-details-btn"
-                                        onClick={() => openProductModal(product)}
+                                        className="buy-now-btn"
+                                        onClick={() => handleWhatsAppOrder(product)}
                                     >
-                                        View Details
-                                    </button>
-                                    <button 
-                                        className={`wishlist-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
-                                        onClick={() => toggleWishlist(product.id)}
-                                    >
-                                        {wishlist.includes(product.id) ? '❤️' : '🤍'}
+                                        Buy Now
                                     </button>
                                 </div>
-                            </div>
-                            <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <div className="product-rating">
-                                    <span className="stars">{'★'.repeat(Math.floor(product.rating))}{'☆'.repeat(5-Math.floor(product.rating))}</span>
-                                    <span className="reviews">({product.reviews})</span>
-                                </div>
-                                <p className="price">${product.price}</p>
-                                <p className="stock">In Stock: {product.stock}</p>
-                                <p className="description">{product.description}</p>
-                                <button 
-                                    className="buy-now-btn"
-                                    onClick={() => handleWhatsAppOrder(product)}
-                                >
-                                    Buy Now
-                                </button>
                             </div>
                         </div>
                     ))}

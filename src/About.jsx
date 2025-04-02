@@ -4,75 +4,103 @@ import './About.css';
 const About = () => {
     return (
         <div className="about-container">
+            {/* Hero Section */}
             <section className="about-hero">
                 <div className="about-hero-content">
-                    <h1>About Llador Store TZ</h1>
-                    <p>Your Destination for Luxury Fragrances</p>
+                    <h1>Our Story</h1>
+                    <p>Discover the journey of Llador Store TZ</p>
                 </div>
             </section>
 
-            <section className="about-content">
-                <div className="about-section">
+            {/* Story Section */}
+            <section className="about-section">
+                <div className="about-content">
                     <h2>Our Story</h2>
-                    <p>
-                        Founded in 2024, Llador Store TZ emerged from a passion for bringing the finest fragrances to Tanzania.
-                        We believe that everyone deserves to experience the luxury of premium perfumes, and we're committed
-                        to making that dream a reality.
-                    </p>
+                    <p>Founded in 2024, Llador Store TZ emerged from a passion for luxury fragrances and exceptional customer service. Our journey began with a simple idea: to provide the finest perfumes to our customers while ensuring an unforgettable shopping experience.</p>
                 </div>
+            </section>
 
-                <div className="about-section">
+            {/* Mission Section */}
+            <section className="about-section mission-section">
+                <div className="about-content">
                     <h2>Our Mission</h2>
-                    <p>
-                        To provide our customers with the most exquisite fragrances while delivering an exceptional
-                        shopping experience. We carefully curate our collection to ensure each product meets our high
-                        standards of quality and luxury.
-                    </p>
+                    <p>To provide our customers with the highest quality fragrances while delivering exceptional service and creating memorable shopping experiences.</p>
                 </div>
+            </section>
 
-                <div className="about-section">
-                    <h2>Our Values</h2>
-                    <div className="values-grid">
-                        <div className="value-card">
-                            <h3>Quality</h3>
-                            <p>We never compromise on the quality of our products.</p>
+            {/* Values Section */}
+            <section className="about-section values-section">
+                <h2>Our Core Values</h2>
+                <div className="values-grid">
+                    <div className="value-card">
+                        <div className="value-icon">✨</div>
+                        <h3>Quality</h3>
+                        <p>We never compromise on the quality of our products</p>
+                    </div>
+                    <div className="value-card">
+                        <div className="value-icon">👥</div>
+                        <h3>Customer Service</h3>
+                        <p>Your satisfaction is our top priority</p>
+                    </div>
+                    <div className="value-card">
+                        <div className="value-icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>We constantly evolve to meet your needs</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Team Section */}
+            <section className="about-section team-section">
+                <h2>Our Team</h2>
+                <div className="team-container">
+                    <div className="team-member">
+                        <div className="member-image-container">
+                            <img 
+                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                alt="Team Member" 
+                                className="member-image"
+                            />
+                            <div className="member-overlay">
+                                <div className="member-social">
+                                    <a href="https://linkedin.com/in/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+                                    <a href="https://twitter.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link">Twitter</a>
+                                    <a href="https://instagram.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
+                                </div>
+                            </div>
                         </div>
-                        <div className="value-card">
-                            <h3>Customer Service</h3>
-                            <p>Your satisfaction is our top priority.</p>
-                        </div>
-                        <div className="value-card">
-                            <h3>Innovation</h3>
-                            <p>We constantly explore new fragrances and trends.</p>
+                        <div className="member-info">
+                            <h3>John Doe</h3>
+                            <p className="member-role">Founder & CEO</p>
+                            <p className="member-bio">With over 15 years of experience in the fragrance industry, John leads our team with passion and expertise.</p>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div className="about-section">
-                    <h2>Our Team</h2>
-                    <div className="team-grid">
-                        <div className="team-member">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member 1" />
-                            <h3>Winy </h3>
-                            <p>Founder & CEO</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="about-section">
-                    <h2>Contact Us</h2>
-                    <div className="contact-info">
-                        <div className="contact-item">
+            {/* Contact Section */}
+            <section className="about-section contact-section">
+                <h2>Get in Touch</h2>
+                <div className="contact-info">
+                    <div className="contact-item">
+                        <div className="contact-icon">📍</div>
+                        <div className="contact-details">
                             <h3>Address</h3>
-                            <p>123 Luxury Street, Dar es Salaam, Tanzania</p>
+                            <p>123 Perfume Street, Dar es Salaam, Tanzania</p>
                         </div>
-                        <div className="contact-item">
+                    </div>
+                    <div className="contact-item">
+                        <div className="contact-icon">📞</div>
+                        <div className="contact-details">
                             <h3>Phone</h3>
-                            <p>+255746718133</p>
+                            <p>+255 746 718 133</p>
                         </div>
-                        <div className="contact-item">
+                    </div>
+                    <div className="contact-item">
+                        <div className="contact-icon">✉️</div>
+                        <div className="contact-details">
                             <h3>Email</h3>
-                            <p>info@lladorstoretz.com</p>
+                            <p>info@lladorstore.com</p>
                         </div>
                     </div>
                 </div>
