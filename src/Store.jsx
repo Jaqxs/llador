@@ -14,6 +14,7 @@ const Store = () => {
     const [selectedPriceRange, setSelectedPriceRange] = useState('all');
     const [selectedRating, setSelectedRating] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Initialize default products if none exist
     const initializeDefaultProducts = () => {
@@ -202,6 +203,11 @@ const Store = () => {
         return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
     };
 
+    // Toggle mobile menu
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
         <div className="store-container">
             {/* Navigation Bar */}
@@ -209,7 +215,10 @@ const Store = () => {
                 <div className="nav-brand">
                     <Link to="/">Llador Store TZ</Link>
                 </div>
-                <div className="nav-links">
+                <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+                    <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                </button>
+                <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
                     <Link to="/" className="active">Home</Link>
                     <Link to="/about">About</Link>
                     <Link to="/admin">Admin</Link>
