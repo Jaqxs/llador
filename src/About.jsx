@@ -36,6 +36,7 @@ const About = () => {
                             <img 
                                 src="/winy.jpg" 
                                 alt="Our Story" 
+                                className="story-img"
                             />
                         </div>
                     </div>
@@ -50,7 +51,7 @@ const About = () => {
                         <div className="team-member animate-fade-in-up">
                             <div className="member-image">
                                 <img 
-                                    src="/winy.jpg" 
+                                    src="/winy.jpg"
                                     alt="CEO of Llador Store TZ" 
                                     className="ceo-image"
                                 />
@@ -70,14 +71,17 @@ const About = () => {
                     <h2 className="text-center animate-fade-in-up">Our Values</h2>
                     <div className="values-grid">
                         <div className="value-card animate-fade-in-up">
+                            <div className="value-icon">✨</div>
                             <h3>Quality</h3>
                             <p>We never compromise on the quality of our products, ensuring each fragrance meets our high standards.</p>
                         </div>
                         <div className="value-card animate-fade-in-up">
+                            <div className="value-icon">💡</div>
                             <h3>Innovation</h3>
                             <p>We continuously explore new fragrance combinations and stay ahead of industry trends.</p>
                         </div>
                         <div className="value-card animate-fade-in-up">
+                            <div className="value-icon">🌱</div>
                             <h3>Sustainability</h3>
                             <p>We're committed to environmentally responsible practices in our production and packaging.</p>
                         </div>

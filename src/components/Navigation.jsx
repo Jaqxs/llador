@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaShoppingCart, FaBars, FaTimes, FaUser } from 'react-icons/fa';
+import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
 import '../styles/Navigation.css';
 
 const Navigation = ({ activePage }) => {
@@ -36,8 +36,7 @@ const Navigation = ({ activePage }) => {
     const navLinks = [
         { path: '/', label: 'Home' },
         { path: '/store', label: 'Store' },
-        { path: '/about', label: 'About' },
-        { path: '/contact', label: 'Contact' }
+        { path: '/about', label: 'About' }
     ];
 
     return (
