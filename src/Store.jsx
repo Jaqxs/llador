@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Store.css';
 
 const Store = () => {
@@ -74,6 +75,26 @@ const Store = () => {
 
     return (
         <div className="store-container">
+            {/* Navigation Bar */}
+            <nav className="store-nav">
+                <div className="nav-brand">
+                    <Link to="/">Llador Store TZ</Link>
+                </div>
+                <div className="nav-links">
+                    <Link to="/" className="active">Home</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/admin">Admin</Link>
+                </div>
+                <div className="nav-cart">
+                    <button 
+                        className="cart-button"
+                        onClick={() => setIsCartOpen(!isCartOpen)}
+                    >
+                        Cart ({cart.length})
+                    </button>
+                </div>
+            </nav>
+
             {/* Hero Section */}
             <section className="hero-section">
                 <div className="hero-content">
