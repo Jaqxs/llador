@@ -170,8 +170,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/winy.jpg') center/cover;
-    opacity: 0.1;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(51, 51, 51, 0.9) 100%);
+    opacity: 0.8;
     z-index: 1;
 }
 

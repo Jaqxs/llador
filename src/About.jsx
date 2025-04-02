@@ -11,6 +11,9 @@ const About = () => {
     const teamRef = useScrollReveal(0.3);
     const valuesRef = useScrollReveal(0.3);
 
+    // Temporary placeholder image URL
+    const placeholderImage = "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80";
+
     return (
         <div className="about-container">
             <Navigation activePage="about" />
@@ -34,7 +37,7 @@ const About = () => {
                         </div>
                         <div className="story-image animate-fade-in">
                             <img 
-                                src="/winy.jpg" 
+                                src={placeholderImage}
                                 alt="Our Story" 
                                 className="story-img"
                             />
@@ -51,7 +54,7 @@ const About = () => {
                         <div className="team-member animate-fade-in-up">
                             <div className="member-image">
                                 <img 
-                                    src="/winy.jpg"
+                                    src={winyImage}
                                     alt="CEO of Llador Store TZ" 
                                     className="ceo-image"
                                 />
