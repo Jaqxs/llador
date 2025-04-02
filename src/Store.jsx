@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import useScrollReveal from './hooks/useScrollReveal';
 import './styles/global.css';
@@ -15,7 +14,6 @@ const Store = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [priceRange, setPriceRange] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     const headerRef = useScrollReveal(0.5);
@@ -209,6 +207,7 @@ const Store = () => {
     const addToCart = (product) => {
         setCart([...cart, product]);
         setIsModalOpen(false);
+        setSelectedProduct(null);
     };
 
     const removeFromCart = (productId) => {
@@ -223,11 +222,6 @@ const Store = () => {
 
     const calculateTotal = () => {
         return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
-    };
-
-    // Toggle mobile menu
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     return (
@@ -304,7 +298,14 @@ const Store = () => {
                             {sortedProducts.map(product => (
                                 <div key={product.id} className="card product-card hover-lift">
                                     <div className="product-image">
-                                        <img src={product.image} alt={product.name} />
+                                        <img 
+                                            src={product.image} 
+                                            alt={product.name} 
+                                            onClick={() => {
+                                                setSelectedProduct(product);
+                                                setIsModalOpen(true);
+                                            }}
+                                        />
                                         <div className="product-overlay">
                                             <button 
                                                 className="btn btn-accent hover-scale"
@@ -349,7 +350,7 @@ const Store = () => {
             </div>
 
             {/* Cart Sidebar */}
-            <div id="cart-sidebar" className={`cart-sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+            <div id="cart-sidebar" className="cart-sidebar">
                 <div className="cart-header">
                     <h3>Shopping Cart</h3>
                     <button className="close-cart hover-scale" onClick={() => document.getElementById('cart-sidebar').classList.remove('open')}>×</button>

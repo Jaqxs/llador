@@ -1,122 +1,89 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import winyImage from './assets/winy.jpg';
+import Navigation from './components/Navigation';
+import useScrollReveal from './hooks/useScrollReveal';
 import './styles/global.css';
+import './styles/animations.css';
 import './About.css';
 
 const About = () => {
+    const headerRef = useScrollReveal(0.5);
+    const ceoRef = useScrollReveal(0.3);
+    const valuesRef = useScrollReveal(0.3);
+    const contactRef = useScrollReveal(0.3);
+
     return (
         <div className="about-container">
-            <nav className="nav">
-                <Link to="/" className="nav-brand">
-                    <i className="fas fa-spray-can"></i>
-                    <span>Llador Store TZ</span>
-                </Link>
-                <div className="nav-links">
-                    <Link to="/" className="nav-link">
-                        <i className="fas fa-home"></i>
-                        <span>Home</span>
-                    </Link>
-                    <Link to="/store" className="nav-link">
-                        <i className="fas fa-store"></i>
-                        <span>Store</span>
-                    </Link>
-                    <Link to="/about" className="nav-link active">
-                        <i className="fas fa-info-circle"></i>
-                        <span>About</span>
-                    </Link>
-                    <Link to="/contact" className="nav-link">
-                        <i className="fas fa-envelope"></i>
-                        <span>Contact</span>
-                    </Link>
-                </div>
-                <div className="nav-actions">
-                    <Link to="/wishlist" className="wishlist-link">
-                        <i className="fas fa-heart"></i>
-                        <span className="wishlist-count">0</span>
-                    </Link>
-                    <Link to="/cart" className="cart-button">
-                        <i className="fas fa-shopping-cart"></i>
-                        <span className="cart-count">0</span>
-                    </Link>
-                </div>
-            </nav>
-
-            <div className="about-hero">
-                <div className="hero-content">
-                    <h1>About Llador Store TZ</h1>
-                    <p>Your Premier Destination for Luxury Perfumes</p>
-                    <div className="hero-scroll">
+            <Navigation activePage="about" />
+            
+            <section className="about-hero scroll-reveal" ref={headerRef}>
+                <div className="hero-content animate-fade-in">
+                    <h1 className="animate-fade-in-up">About Llador Store TZ</h1>
+                    <p className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                        Your destination for luxury fragrances in Tanzania
+                    </p>
+                    <div className="scroll-indicator animate-bounce">
                         <span>Scroll Down</span>
-                        <i className="fas fa-chevron-down"></i>
+                        <div className="scroll-arrow"></div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <section className="about-content">
-                <div className="card about-section">
-                    <h2>Our Story</h2>
-                    <p>
-                        Founded with a passion for luxury fragrances, Llador Store TZ has become
-                        Tanzania's leading destination for premium perfumes. We curate the finest
-                        collections from around the world, bringing you an exquisite selection of
-                        scents that define elegance and sophistication.
-                    </p>
-                </div>
-
-                <div className="ceo-section">
-                    <div className="card ceo-image-container">
-                        <img 
-                            src={winyImage} 
-                            alt="CEO of Llador Store TZ" 
-                            className="ceo-image" 
-                        />
-                        <div className="ceo-overlay">
-                            <h3>winy</h3>
-                            <p>Founder & CEO</p>
+            <section className="about-section scroll-reveal" ref={ceoRef}>
+                <div className="container">
+                    <div className="ceo-section">
+                        <div className="ceo-image-container">
+                            <img
+                                src="images/winy.jpg"
+                                alt="CEO of Llador Store TZ"
+                                className="ceo-image"
+                            />
+                        </div>
+                        <div className="ceo-message">
+                            <h2>Our Story</h2>
+                            <p>
+                                Welcome to Llador Store TZ, where luxury meets authenticity. 
+                                Founded with a passion for bringing the finest fragrances to Tanzania, 
+                                we curate a collection that represents the epitome of elegance and sophistication.
+                            </p>
+                            <p>
+                                Our journey began with a simple vision: to provide our customers with 
+                                access to world-class perfumes that enhance their natural beauty and 
+                                reflect their unique personality.
+                            </p>
                         </div>
                     </div>
-                    <div className="card ceo-message">
-                        <h2>Message from our CEO</h2>
-                        <blockquote>
-                            "Our mission is to bring the world's finest fragrances to Tanzania,
-                            making luxury accessible while maintaining the highest standards of
-                            quality and authenticity."
-                        </blockquote>
-                    </div>
                 </div>
+            </section>
 
-                <div className="values-section">
+            <section className="values-section scroll-reveal" ref={valuesRef}>
+                <div className="container">
                     <h2 className="text-center">Our Values</h2>
                     <div className="values-grid">
-                        <div className="card value-card">
-                            <i className="fas fa-gem"></i>
+                        <div className="value-card">
+                            <div className="value-icon">✨</div>
                             <h3>Quality</h3>
-                            <p>We source only authentic, premium fragrances.</p>
+                            <p>We offer only the finest fragrances from renowned brands worldwide.</p>
                         </div>
-                        <div className="card value-card">
-                            <i className="fas fa-heart"></i>
-                            <h3>Passion</h3>
-                            <p>Our love for perfumes drives everything we do.</p>
-                        </div>
-                        <div className="card value-card">
-                            <i className="fas fa-star"></i>
-                            <h3>Excellence</h3>
-                            <p>We strive for excellence in every aspect.</p>
-                        </div>
-                        <div className="card value-card">
-                            <i className="fas fa-handshake"></i>
+                        <div className="value-card">
+                            <div className="value-icon">🤝</div>
                             <h3>Trust</h3>
-                            <p>Building lasting relationships with our customers.</p>
+                            <p>Building lasting relationships with our customers through transparency and reliability.</p>
+                        </div>
+                        <div className="value-card">
+                            <div className="value-icon">💫</div>
+                            <h3>Excellence</h3>
+                            <p>Committed to providing exceptional service and products.</p>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div className="contact-section">
+            <section className="contact-section scroll-reveal" ref={contactRef}>
+                <div className="container">
                     <h2 className="text-center">Connect With Us</h2>
                     <div className="social-links">
                         <a
-                            href="https://instagram.com/lladorstoretz"
+                            href="https://instagram.com/llador_store_tz"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn btn-accent social-link"
