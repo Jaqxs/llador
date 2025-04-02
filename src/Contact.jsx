@@ -94,19 +94,4 @@ const Contact = () => {
                     <div className="map-container">
                         {/* Add your map embed code here */}
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3968.796966416477!2d39.2083283!3d-6.7923564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4f0d5c5c5c5c%3A0x5c5c5c5c5c5c5c5c!2sDar%20es%20Salaam%2C%20Tanzania!5e0!3m2!1sen!2s!4v1234567890!5m2!1sen!2s"
-                            width="100%"
-                            height="450"
-                            style={{ border: 0 }}
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                        ></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default Contact; 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.8!2d39.2!3d-6.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNDgnMDAuMCJTIDM5wrAxMicwMC4wIkU!5e0!3m2!1sen!2stz!4v1234567890"

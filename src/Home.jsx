@@ -112,10 +112,37 @@ const Home = () => {
 
     const handleNewsletterSubmit = (e) => {
         e.preventDefault();
-        const email = e.target.email.value;
+        const formData = new FormData(e.target);
+        const email = formData.get('email');
         // Here you would typically send this to your backend
         alert('Thank you for subscribing!');
         e.target.reset();
+    };
+
+    // Add pagination controls to the featured products section
+    const renderPagination = () => {
+        if (totalPages <= 1) return null;
+        return (
+            <div className="pagination-controls">
+                <button 
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                    className="pagination-button"
+                >
+                    Previous
+                </button>
+                <span className="page-info">
+                    Page {currentPage} of {totalPages}
+                </span>
+                <button 
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className="pagination-button"
+                >
+                    Next
+                </button>
+            </div>
+        );
     };
 
     return (
@@ -155,7 +182,7 @@ const Home = () => {
                 <div className="container">
                     <h2 className="section-title animate-fade-in-up">Featured Products</h2>
                     <div className="featured-grid">
-                        {featuredProducts.map((product) => (
+                        {paginatedProducts.map((product) => (
                             <div key={product.id} className="featured-card animate-fade-in-up">
                                 <div className="featured-image-container">
                                     <img src={product.image} alt={product.name} className="featured-image" />
@@ -176,6 +203,7 @@ const Home = () => {
                             </div>
                         ))}
                     </div>
+                    {renderPagination()}
                 </div>
             </section>
 

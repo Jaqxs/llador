@@ -98,9 +98,9 @@ const About = () => {
                     <div className="team-grid">
                         <div className="team-member animate-fade-in-up">
                             <div className="member-image">
-                                <img 
+                                <img
                                     src="/winy.jpg"
-                                    alt="CEO of Llador Store TZ" 
+                                    alt="CEO of Llador Store TZ"
                                     className="ceo-image"
                                 />
                             </div>
@@ -108,9 +108,9 @@ const About = () => {
                                 <h3>Winy</h3>
                                 <p>CEO & Founder</p>
                                 <div className="social-links">
-                                    <a href="#" className="social-link">LinkedIn</a>
-                                    <a href="#" className="social-link">Twitter</a>
-                                    <a href="#" className="social-link">Instagram</a>
+                                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+                                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">Twitter</a>
+                                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
                                 </div>
                             </div>
                         </div>
