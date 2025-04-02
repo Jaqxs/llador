@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Admin.css';
 
 const Admin = () => {
-    const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
