@@ -1,0 +1,71 @@
+/* Main Navigation */
+.main-nav {
+    background-color: var(--card-background);
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Adjust main content to account for fixed navigation */
+.store-container,
+.about-container,
+.admin-dashboard {
+    padding-top: 80px;
+}
+
+/* Global Styles */
+:root {
+    --primary-color: #1a1a1a;
+    --secondary-color: #2a2a2a;
+    --accent-color: #d4af37;
+    --text-color: #ffffff;
+    --card-background: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+} 

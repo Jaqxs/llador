@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 
 const Admin = () => {
+    const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [products, setProducts] = useState([]);
     const [editingProduct, setEditingProduct] = useState(null);
     const [newProduct, setNewProduct] = useState({
@@ -9,11 +12,12 @@ const Admin = () => {
         price: '',
         description: '',
         image: '',
-        category: 'Men'
+        category: 'Unisex'
     });
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [credentials, setCredentials] = useState({
+        username: '',
+        password: ''
+    });
 
     useEffect(() => {
         // Load products from localStorage
@@ -26,18 +30,23 @@ const Admin = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         // Simple authentication (replace with proper authentication in production)
-        if (username === 'admin' && password === 'admin123') {
+        if (credentials.username === 'admin' && credentials.password === 'admin123') {
             setIsAuthenticated(true);
         } else {
             alert('Invalid credentials');
         }
     };
 
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        setCredentials({ username: '', password: '' });
+    };
+
     const handleAddProduct = (e) => {
         e.preventDefault();
         const product = {
-            id: Date.now(),
             ...newProduct,
+            id: Date.now(),
             price: parseFloat(newProduct.price)
         };
         const updatedProducts = [...products, product];
@@ -48,19 +57,27 @@ const Admin = () => {
             price: '',
             description: '',
             image: '',
-            category: 'Men'
+            category: 'Unisex'
         });
     };
 
     const handleEditProduct = (product) => {
         setEditingProduct(product);
-        setNewProduct(product);
+        setNewProduct({
+            name: product.name,
+            price: product.price.toString(),
+            description: product.description,
+            image: product.image,
+            category: product.category
+        });
     };
 
     const handleUpdateProduct = (e) => {
         e.preventDefault();
         const updatedProducts = products.map(product =>
-            product.id === editingProduct.id ? { ...newProduct, id: product.id, price: parseFloat(newProduct.price) } : product
+            product.id === editingProduct.id
+                ? { ...newProduct, id: product.id, price: parseFloat(newProduct.price) }
+                : product
         );
         setProducts(updatedProducts);
         localStorage.setItem('products', JSON.stringify(updatedProducts));
@@ -70,7 +87,7 @@ const Admin = () => {
             price: '',
             description: '',
             image: '',
-            category: 'Men'
+            category: 'Unisex'
         });
     };
 
@@ -82,26 +99,22 @@ const Admin = () => {
         }
     };
 
-    const handleDragStart = (e, productId) => {
-        e.dataTransfer.setData('text/plain', productId);
+    const handleDragStart = (e, index) => {
+        e.dataTransfer.setData('text/plain', index);
     };
 
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
-    const handleDrop = (e, targetId) => {
+    const handleDrop = (e, dropIndex) => {
         e.preventDefault();
-        const draggedId = parseInt(e.dataTransfer.getData('text/plain'));
-        const updatedProducts = [...products];
-        const draggedIndex = updatedProducts.findIndex(p => p.id === draggedId);
-        const targetIndex = updatedProducts.findIndex(p => p.id === targetId);
-        
-        const [draggedProduct] = updatedProducts.splice(draggedIndex, 1);
-        updatedProducts.splice(targetIndex, 0, draggedProduct);
-        
-        setProducts(updatedProducts);
-        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        const dragIndex = parseInt(e.dataTransfer.getData('text/plain'));
+        const newProducts = [...products];
+        const [removed] = newProducts.splice(dragIndex, 1);
+        newProducts.splice(dropIndex, 0, removed);
+        setProducts(newProducts);
+        localStorage.setItem('products', JSON.stringify(newProducts));
     };
 
     if (!isAuthenticated) {
@@ -112,14 +125,14 @@ const Admin = () => {
                     <input
                         type="text"
                         placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={credentials.username}
+                        onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                     />
                     <input
                         type="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={credentials.password}
+                        onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                     />
                     <button type="submit">Login</button>
                 </form>
@@ -131,7 +144,7 @@ const Admin = () => {
         <div className="admin-dashboard">
             <div className="admin-header">
                 <h1>Admin Dashboard</h1>
-                <button onClick={() => setIsAuthenticated(false)}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
             </div>
 
             <div className="admin-content">
@@ -184,7 +197,7 @@ const Admin = () => {
                                     price: '',
                                     description: '',
                                     image: '',
-                                    category: 'Men'
+                                    category: 'Unisex'
                                 });
                             }}>
                                 Cancel
@@ -196,20 +209,20 @@ const Admin = () => {
                 <div className="products-list">
                     <h2>Products</h2>
                     <div className="products-grid">
-                        {products.map(product => (
+                        {products.map((product, index) => (
                             <div
                                 key={product.id}
                                 className="product-item"
                                 draggable
-                                onDragStart={(e) => handleDragStart(e, product.id)}
+                                onDragStart={(e) => handleDragStart(e, index)}
                                 onDragOver={handleDragOver}
-                                onDrop={(e) => handleDrop(e, product.id)}
+                                onDrop={(e) => handleDrop(e, index)}
                             >
                                 <img src={product.image} alt={product.name} />
                                 <div className="product-info">
                                     <h3>{product.name}</h3>
                                     <p>${product.price}</p>
-                                    <p>{product.category}</p>
+                                    <p>{product.description}</p>
                                 </div>
                                 <div className="product-actions">
                                     <button onClick={() => handleEditProduct(product)}>Edit</button>
