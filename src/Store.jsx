@@ -13,6 +13,7 @@ const Store = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [selectedPriceRange, setSelectedPriceRange] = useState('all');
     const [selectedRating, setSelectedRating] = useState('all');
+    const [sortBy, setSortBy] = useState('featured');
 
     // Initialize default products if none exist
     const initializeDefaultProducts = () => {

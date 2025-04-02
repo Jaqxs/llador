@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Admin.css';
@@ -36,12 +36,7 @@ const Admin = () => {
         setProducts(savedProducts);
     }, []);
 
-    // Calculate analytics whenever products change
-    useEffect(() => {
-        calculateAnalytics();
-    }, [products, calculateAnalytics]);
-
-    const calculateAnalytics = () => {
+    const calculateAnalytics = useCallback(() => {
         const totalProducts = products.length;
         const totalOrders = products.reduce((sum, product) => sum + (product.orders || 0), 0);
         const totalRevenue = products.reduce((sum, product) => sum + (product.revenue || 0), 0);
@@ -53,7 +48,12 @@ const Admin = () => {
             totalRevenue,
             averageOrderValue
         });
-    };
+    }, [products]);
+
+    // Calculate analytics whenever products change
+    useEffect(() => {
+        calculateAnalytics();
+    }, [products, calculateAnalytics]);
 
     const handleLogin = (e) => {
         e.preventDefault();
