@@ -196,6 +196,10 @@
     text-decoration: none;
     border-radius: 25px;
     transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
 }
 
 .view-button:hover {
@@ -344,6 +348,11 @@
     .newsletter-form button {
         width: 100%;
     }
+
+    .featured-card {
+        margin: 0 auto;
+        max-width: 400px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -366,5 +375,26 @@
 
     .featured-image {
         height: 250px;
+    }
+
+    .featured-info {
+        padding: 1rem;
+    }
+
+    .view-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .category-card {
+        padding: 1.5rem;
+    }
+
+    .category-icon {
+        font-size: 2.5rem;
+    }
+
+    .category-card h3 {
+        font-size: 1.1rem;
     }
 } 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from './context/CartContext';
 import Navigation from './components/Navigation';
 import useScrollReveal from './hooks/useScrollReveal';
 import './styles/global.css';
@@ -11,7 +12,8 @@ const Home = () => {
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState('all');
-    const productsPerPage = 3;
+    const { addToCart } = useCart();
+    const productsPerPage = 6;
 
     const headerRef = useScrollReveal(0.5);
     const featuredRef = useScrollReveal(0.3);
@@ -37,22 +39,24 @@ const Home = () => {
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
     const startIndex = (currentPage - 1) * productsPerPage;
-    const displayedProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
+    const paginatedProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         setCurrentPage(1);
     };
 
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(prev => prev + 1);
-        }
-    };
-
-    const handlePrevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(prev => prev - 1);
+    const handleAddToCart = (product) => {
+        addToCart(product);
+        // Show feedback to user
+        const button = document.getElementById(`add-to-cart-${product.id}`);
+        if (button) {
+            button.textContent = 'Added!';
+            button.style.backgroundColor = '#4CAF50';
+            setTimeout(() => {
+                button.textContent = 'Add to Cart';
+                button.style.backgroundColor = '#ff6b6b';
+            }, 2000);
         }
     };
 
@@ -90,9 +94,13 @@ const Home = () => {
                                 <div className="featured-info">
                                     <h3>{product.name}</h3>
                                     <p className="price">${product.price}</p>
-                                    <Link to={`/product/${product.id}`} className="view-button">
-                                        View Details
-                                    </Link>
+                                    <button 
+                                        onClick={() => handleAddToCart(product)}
+                                        id={`add-to-cart-${product.id}`}
+                                        className="view-button"
+                                    >
+                                        Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         ))}
