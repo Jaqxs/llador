@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './context/CartContext';
 import Navigation from './components/Navigation';
@@ -14,6 +14,7 @@ const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const { addToCart } = useCart();
     const productsPerPage = 6;
+    const bottleRef = useRef(null);
 
     const headerRef = useScrollReveal(0.5);
     const featuredRef = useScrollReveal(0.3);
@@ -31,6 +32,43 @@ const Home = () => {
         };
 
         loadProducts();
+
+        // Add mouse move effect for 3D bottle
+        const handleMouseMove = (e) => {
+            if (!bottleRef.current) return;
+            
+            const bottle = bottleRef.current;
+            const rect = bottle.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            bottle.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        };
+
+        const handleMouseLeave = () => {
+            if (bottleRef.current) {
+                bottleRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            }
+        };
+
+        const bottle = bottleRef.current;
+        if (bottle) {
+            bottle.addEventListener('mousemove', handleMouseMove);
+            bottle.addEventListener('mouseleave', handleMouseLeave);
+        }
+
+        return () => {
+            if (bottle) {
+                bottle.removeEventListener('mousemove', handleMouseMove);
+                bottle.removeEventListener('mouseleave', handleMouseLeave);
+            }
+        };
     }, []);
 
     const filteredProducts = selectedCategory === 'all' 
@@ -74,11 +112,20 @@ const Home = () => {
                     </Link>
                 </div>
                 <div className="hero-image animate-fade-in">
-                    <div className="perfume-bottle">
-                        <div className="bottle-body"></div>
-                        <div className="bottle-neck"></div>
-                        <div className="bottle-cap"></div>
-                        <div className="liquid"></div>
+                    <div className="perfume-bottle" ref={bottleRef}>
+                        <div className="bottle-body">
+                            <div className="bottle-reflection"></div>
+                        </div>
+                        <div className="bottle-neck">
+                            <div className="bottle-neck-reflection"></div>
+                        </div>
+                        <div className="bottle-cap">
+                            <div className="bottle-cap-reflection"></div>
+                        </div>
+                        <div className="liquid">
+                            <div className="liquid-reflection"></div>
+                        </div>
+                        <div className="spray-effect"></div>
                     </div>
                 </div>
             </section>
@@ -90,17 +137,21 @@ const Home = () => {
                     <div className="featured-grid">
                         {featuredProducts.map((product) => (
                             <div key={product.id} className="featured-card animate-fade-in-up">
-                                <img src={product.image} alt={product.name} className="featured-image" />
+                                <div className="featured-image-container">
+                                    <img src={product.image} alt={product.name} className="featured-image" />
+                                    <div className="featured-overlay">
+                                        <button 
+                                            onClick={() => handleAddToCart(product)}
+                                            id={`add-to-cart-${product.id}`}
+                                            className="view-button"
+                                        >
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
                                 <div className="featured-info">
                                     <h3>{product.name}</h3>
                                     <p className="price">${product.price}</p>
-                                    <button 
-                                        onClick={() => handleAddToCart(product)}
-                                        id={`add-to-cart-${product.id}`}
-                                        className="view-button"
-                                    >
-                                        Add to Cart
-                                    </button>
                                 </div>
                             </div>
                         ))}
