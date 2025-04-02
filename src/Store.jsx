@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import useScrollReveal from './hooks/useScrollReveal';
+import './styles/global.css';
+import './styles/animations.css';
 import './Store.css';
 
 const Store = () => {
@@ -8,13 +12,36 @@ const Store = () => {
     const [wishlist, setWishlist] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [filter, setFilter] = useState('all');
-    const [searchQuery, setSearchQuery] = useState('');
-    const [isCartOpen, setIsCartOpen] = useState(false);
-    const [selectedPriceRange, setSelectedPriceRange] = useState('all');
-    const [selectedRating, setSelectedRating] = useState('all');
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [priceRange, setPriceRange] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const headerRef = useScrollReveal(0.5);
+    const filtersRef = useScrollReveal(0.2);
+    const productsRef = useScrollReveal(0.2);
+
+    const categories = [
+        { id: 'all', name: 'All Products' },
+        { id: 'womens', name: "Women's Perfumes" },
+        { id: 'mens', name: "Men's Perfumes" },
+        { id: 'gifts', name: 'Gift Sets' }
+    ];
+
+    const priceRanges = [
+        { id: 'all', name: 'All Prices' },
+        { id: 'under50', name: 'Under $50' },
+        { id: '50to100', name: '$50 - $100' },
+        { id: 'over100', name: 'Over $100' }
+    ];
+
+    const sortOptions = [
+        { id: 'featured', name: 'Featured' },
+        { id: 'price-low', name: 'Price: Low to High' },
+        { id: 'price-high', name: 'Price: High to Low' },
+        { id: 'newest', name: 'Newest First' }
+    ];
 
     // Initialize default products if none exist
     const initializeDefaultProducts = () => {
@@ -115,12 +142,24 @@ const Store = () => {
 
     // Load products from localStorage or initialize defaults
     useEffect(() => {
-        const savedProducts = JSON.parse(localStorage.getItem('products'));
-        if (savedProducts && savedProducts.length > 0) {
-            setProducts(savedProducts);
-        } else {
-            initializeDefaultProducts();
-        }
+        // Simulate loading products
+        const loadProducts = async () => {
+            setIsLoading(true);
+            try {
+                const savedProducts = JSON.parse(localStorage.getItem('products'));
+                if (savedProducts && savedProducts.length > 0) {
+                    setProducts(savedProducts);
+                } else {
+                    initializeDefaultProducts();
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadProducts();
     }, []);
 
     // Load wishlist from localStorage
@@ -135,17 +174,13 @@ const Store = () => {
     }, [wishlist]);
 
     const filteredProducts = products.filter(product => {
-        const matchesFilter = filter === 'all' || product.category === filter;
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            product.description.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesPriceRange = selectedPriceRange === 'all' || 
-            (selectedPriceRange === 'under50' && product.price < 50) ||
-            (selectedPriceRange === '50to100' && product.price >= 50 && product.price <= 100) ||
-            (selectedPriceRange === '100to200' && product.price > 100 && product.price <= 200) ||
-            (selectedPriceRange === 'over200' && product.price > 200);
-        const matchesRating = selectedRating === 'all' || product.rating >= parseFloat(selectedRating);
+        const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+        const matchesPriceRange = priceRange === 'all' || 
+            (priceRange === 'under50' && product.price < 50) ||
+            (priceRange === '50to100' && product.price >= 50 && product.price <= 100) ||
+            (priceRange === 'over100' && product.price > 100);
         
-        return matchesFilter && matchesSearch && matchesPriceRange && matchesRating;
+        return matchesCategory && matchesPriceRange;
     });
 
     const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -154,10 +189,8 @@ const Store = () => {
                 return a.price - b.price;
             case 'price-high':
                 return b.price - a.price;
-            case 'rating':
-                return b.rating - a.rating;
-            case 'reviews':
-                return b.reviews - a.reviews;
+            case 'newest':
+                return b.id - a.id;
             default:
                 return 0;
         }
@@ -176,21 +209,10 @@ const Store = () => {
     const addToCart = (product) => {
         setCart([...cart, product]);
         setIsModalOpen(false);
-        setIsCartOpen(true);
     };
 
     const removeFromCart = (productId) => {
         setCart(cart.filter(item => item.id !== productId));
-    };
-
-    const openProductModal = (product) => {
-        setSelectedProduct(product);
-        setIsModalOpen(true);
-    };
-
-    const closeProductModal = () => {
-        setSelectedProduct(null);
-        setIsModalOpen(false);
     };
 
     const handleWhatsAppOrder = (product) => {
@@ -210,173 +232,138 @@ const Store = () => {
 
     return (
         <div className="store-container">
-            {/* Navigation Bar */}
-            <nav className="store-nav">
-                <div className="nav-brand">
-                    <Link to="/">Llador Store TZ</Link>
-                </div>
-                <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-                    <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-                </button>
-                <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
-                    <Link to="/" className="active">Home</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/admin">Admin</Link>
-                </div>
-                <div className="nav-actions">
-                    <Link to="/wishlist" className="wishlist-link">
-                        <i className="fas fa-heart"></i>
-                        <span className="wishlist-count">{wishlist.length}</span>
-                    </Link>
-                    <button 
-                        className="cart-button"
-                        onClick={() => setIsCartOpen(!isCartOpen)}
-                    >
-                        <i className="fas fa-shopping-cart"></i>
-                        <span className="cart-count">{cart.length}</span>
-                    </button>
-                </div>
-            </nav>
+            <Navigation activePage="store" />
+            
+            <div className="store-header scroll-reveal" ref={headerRef}>
+                <h1 className="animate-fade-in-up">Our Collection</h1>
+                <p className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                    Discover our curated selection of luxury fragrances
+                </p>
+            </div>
 
-            {/* Hero Section with 3D Effect */}
-            <section className="hero-section">
-                <div className="hero-content">
-                    <div className="hero-3d-container">
-                        <div className="hero-3d-element">
-                            <h1 className="hero-title">Llador Store TZ</h1>
-                            <p className="hero-tagline">Discover the Essence of Luxury</p>
+            <div className="store-content">
+                <aside className="filters-sidebar scroll-reveal" ref={filtersRef}>
+                    <div className="card filter-card hover-lift">
+                        <h3 className="animate-fade-in-up">Categories</h3>
+                        <div className="filter-options stagger-animation">
+                            {categories.map(category => (
+                                <button
+                                    key={category.id}
+                                    className={`filter-option ${selectedCategory === category.id ? 'active' : ''} hover-scale`}
+                                    onClick={() => setSelectedCategory(category.id)}
+                                >
+                                    {category.name}
+                                </button>
+                            ))}
                         </div>
-                        <div className="hero-3d-background"></div>
                     </div>
-                    <button className="cta-button" onClick={() => document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' })}>
-                        Shop Now
-                    </button>
-                </div>
-            </section>
 
-            {/* Products Section with 3D Cards */}
-            <section id="products-section" className="products-section">
-                <div className="filters-container">
-                    <div className="search-container">
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="search-input"
-                        />
-                        <i className="fas fa-search search-icon"></i>
+                    <div className="card filter-card hover-lift">
+                        <h3 className="animate-fade-in-up">Price Range</h3>
+                        <div className="filter-options stagger-animation">
+                            {priceRanges.map(range => (
+                                <button
+                                    key={range.id}
+                                    className={`filter-option ${priceRange === range.id ? 'active' : ''} hover-scale`}
+                                    onClick={() => setPriceRange(range.id)}
+                                >
+                                    {range.name}
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                    <div className="filters">
-                        <select 
-                            value={filter} 
-                            onChange={(e) => setFilter(e.target.value)}
-                            className="filter-select"
-                        >
-                            <option value="all">All Categories</option>
-                            <option value="men">Men's Perfumes</option>
-                            <option value="women">Women's Perfumes</option>
-                            <option value="unisex">Unisex Fragrances</option>
-                        </select>
-                        <select 
-                            value={selectedPriceRange} 
-                            onChange={(e) => setSelectedPriceRange(e.target.value)}
-                            className="filter-select"
-                        >
-                            <option value="all">All Prices</option>
-                            <option value="under50">Under $50</option>
-                            <option value="50to100">$50 - $100</option>
-                            <option value="over100">Over $100</option>
-                        </select>
-                        <select 
-                            value={selectedRating} 
-                            onChange={(e) => setSelectedRating(e.target.value)}
-                            className="filter-select"
-                        >
-                            <option value="all">All Ratings</option>
-                            <option value="4plus">4+ Stars</option>
-                            <option value="3plus">3+ Stars</option>
-                            <option value="2plus">2+ Stars</option>
-                        </select>
-                        <select 
-                            value={sortBy} 
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="filter-select"
-                        >
-                            <option value="featured">Featured</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="rating">Highest Rated</option>
-                            <option value="reviews">Most Reviewed</option>
-                        </select>
-                    </div>
-                </div>
+                </aside>
 
-                <div className="products-grid">
-                    {sortedProducts.map(product => (
-                        <div key={product.id} className="product-card">
-                            <div className="product-3d-container">
-                                <div className="product-image-container">
-                                    <img src={product.image} alt={product.name} className="product-image" />
-                                    <div className="product-overlay">
-                                        <button 
-                                            className="view-details-btn"
-                                            onClick={() => openProductModal(product)}
-                                        >
-                                            View Details
-                                        </button>
-                                        <button 
-                                            className={`wishlist-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
-                                            onClick={() => toggleWishlist(product.id)}
-                                        >
-                                            {wishlist.includes(product.id) ? '❤️' : '🤍'}
-                                        </button>
+                <main className="products-section scroll-reveal" ref={productsRef}>
+                    <div className="products-header animate-fade-in-up">
+                        <div className="products-count">
+                            Showing {sortedProducts.length} products
+                        </div>
+                        <div className="sort-selector">
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="sort-select hover-scale"
+                            >
+                                {sortOptions.map(option => (
+                                    <option key={option.id} value={option.id}>
+                                        {option.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    {isLoading ? (
+                        <div className="loading-container">
+                            <div className="loading-spinner"></div>
+                            <p>Loading products...</p>
+                        </div>
+                    ) : (
+                        <div className="products-grid stagger-animation">
+                            {sortedProducts.map(product => (
+                                <div key={product.id} className="card product-card hover-lift">
+                                    <div className="product-image">
+                                        <img src={product.image} alt={product.name} />
+                                        <div className="product-overlay">
+                                            <button 
+                                                className="btn btn-accent hover-scale"
+                                                onClick={() => addToCart(product)}
+                                            >
+                                                Add to Cart
+                                            </button>
+                                            <button 
+                                                className={`wishlist-btn ${wishlist.includes(product.id) ? 'active' : ''} hover-scale`}
+                                                onClick={() => toggleWishlist(product.id)}
+                                            >
+                                                {wishlist.includes(product.id) ? '❤️' : '🤍'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="product-info">
+                                        <h3>{product.name}</h3>
+                                        <p className="price">${product.price}</p>
                                     </div>
                                 </div>
-                                <div className="product-info">
-                                    <h3>{product.name}</h3>
-                                    <div className="product-rating">
-                                        <span className="stars">{'★'.repeat(Math.floor(product.rating))}{'☆'.repeat(5-Math.floor(product.rating))}</span>
-                                        <span className="reviews">({product.reviews})</span>
-                                    </div>
-                                    <p className="price">${product.price}</p>
-                                    <p className="stock">In Stock: {product.stock}</p>
-                                    <p className="description">{product.description}</p>
-                                    <button 
-                                        className="buy-now-btn"
-                                        onClick={() => handleWhatsAppOrder(product)}
-                                    >
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </section>
+                    )}
+
+                    <div className="pagination animate-fade-in-up">
+                        <button className="btn btn-outline hover-scale">Previous</button>
+                        <div className="page-numbers">
+                            <button className="btn btn-outline active hover-scale">1</button>
+                            <button className="btn btn-outline hover-scale">2</button>
+                            <button className="btn btn-outline hover-scale">3</button>
+                            <span>...</span>
+                            <button className="btn btn-outline hover-scale">10</button>
+                        </div>
+                        <button className="btn btn-outline hover-scale">Next</button>
+                    </div>
+                </main>
+            </div>
 
             {/* Cart Icon */}
-            <div className="cart-icon" onClick={() => setIsCartOpen(!isCartOpen)}>
-                <span className="cart-count">{cart.length}</span>
+            <div className="cart-icon hover-scale" onClick={() => document.getElementById('cart-sidebar').scrollIntoView({ behavior: 'smooth' })}>
                 🛒
             </div>
 
             {/* Cart Sidebar */}
-            <div className={`cart-sidebar ${isCartOpen ? 'open' : ''}`}>
+            <div id="cart-sidebar" className={`cart-sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
                 <div className="cart-header">
                     <h3>Shopping Cart</h3>
-                    <button className="close-cart" onClick={() => setIsCartOpen(false)}>×</button>
+                    <button className="close-cart hover-scale" onClick={() => document.getElementById('cart-sidebar').classList.remove('open')}>×</button>
                 </div>
                 <div className="cart-items">
                     {cart.map(item => (
-                        <div key={item.id} className="cart-item">
+                        <div key={item.id} className="cart-item animate-fade-in">
                             <img src={item.image} alt={item.name} />
                             <div className="cart-item-details">
                                 <h4>{item.name}</h4>
                                 <p>${item.price}</p>
                             </div>
                             <button 
-                                className="remove-item"
+                                className="remove-item hover-scale"
                                 onClick={() => removeFromCart(item.id)}
                             >
                                 ×
@@ -390,7 +377,7 @@ const Store = () => {
                         <span>${calculateTotal()}</span>
                     </div>
                     <button 
-                        className="checkout-btn"
+                        className="checkout-btn hover-scale"
                         onClick={() => {
                             const message = `Hello, I'd like to order the following items from Llador Store TZ:\n${cart.map(item => `${item.name} - $${item.price}`).join('\n')}\nTotal: $${calculateTotal()}`;
                             const whatsappUrl = `https://wa.me/+255123456789?text=${encodeURIComponent(message)}`;
@@ -404,9 +391,9 @@ const Store = () => {
 
             {/* Product Modal */}
             {isModalOpen && selectedProduct && (
-                <div className="product-modal">
-                    <div className="product-details">
-                        <button className="close-modal" onClick={closeProductModal}>×</button>
+                <div className="product-modal animate-fade-in">
+                    <div className="product-details animate-scale-in">
+                        <button className="close-modal hover-scale" onClick={() => setIsModalOpen(false)}>×</button>
                         <div className="modal-image-container">
                             <img src={selectedProduct.image} alt={selectedProduct.name} />
                         </div>
@@ -415,13 +402,13 @@ const Store = () => {
                         <p className="description">{selectedProduct.description}</p>
                         <div className="modal-buttons">
                             <button 
-                                className="add-to-cart-btn"
+                                className="add-to-cart-btn hover-scale"
                                 onClick={() => addToCart(selectedProduct)}
                             >
                                 Add to Cart
                             </button>
                             <button 
-                                className="buy-now-btn"
+                                className="buy-now-btn hover-scale"
                                 onClick={() => handleWhatsAppOrder(selectedProduct)}
                             >
                                 Buy Now
