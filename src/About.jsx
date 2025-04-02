@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import winyImage from './assets/winy.jpg';
 import './About.css';
 
 const About = () => {
@@ -46,7 +47,7 @@ const About = () => {
                 <div className="ceo-section">
                     <div className="ceo-image-container">
                         <img 
-                            src="images/winy.jpg" 
+                            src={winyImage} 
                             alt="CEO of Llador Store TZ" 
                             className="ceo-image" 
                         />
@@ -97,14 +98,6 @@ const About = () => {
                         <a href="https://www.facebook.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link facebook">
                             <i className="fab fa-facebook-f"></i>
                             <span>Facebook</span>
-                        </a>
-                        <a href="https://www.instagram.com/llador_store_tz" target="_blank" rel="noopener noreferrer" className="social-link instagram">
-                            <i className="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://www.twitter.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link twitter">
-                            <i className="fab fa-twitter"></i>
-                            <span>Twitter</span>
                         </a>
                         <a href="https://wa.me/255746718133" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
                             <i className="fab fa-whatsapp"></i>
