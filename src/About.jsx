@@ -2,6 +2,13 @@ import React from 'react';
 import './About.css';
 
 const About = () => {
+    const socialLinks = {
+        facebook: 'https://facebook.com/lladorstore',
+        twitter: 'https://twitter.com/lladorstore',
+        instagram: 'https://instagram.com/lladorstore',
+        whatsapp: 'https://wa.me/255746718133'
+    };
+
     return (
         <div className="about-container">
             {/* Hero Section */}
@@ -9,6 +16,20 @@ const About = () => {
                 <div className="about-hero-content">
                     <h1>Our Story</h1>
                     <p>Discover the journey of Llador Store TZ</p>
+                    <div className="hero-social-links">
+                        <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-icon">
+                            <i className="fab fa-facebook"></i>
+                        </a>
+                        <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-icon">
+                            <i className="fab fa-twitter"></i>
+                        </a>
+                        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-icon">
+                            <i className="fab fa-instagram"></i>
+                        </a>
+                        <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="social-icon">
+                            <i className="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -63,9 +84,18 @@ const About = () => {
                             />
                             <div className="member-overlay">
                                 <div className="member-social">
-                                    <a href="https://linkedin.com/in/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-                                    <a href="https://twitter.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link">Twitter</a>
-                                    <a href="https://instagram.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
+                                    <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-link">
+                                        <i className="fab fa-facebook"></i>
+                                    </a>
+                                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-link">
+                                        <i className="fab fa-twitter"></i>
+                                    </a>
+                                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-link">
+                                        <i className="fab fa-instagram"></i>
+                                    </a>
+                                    <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="social-link">
+                                        <i className="fab fa-whatsapp"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -102,6 +132,23 @@ const About = () => {
                             <h3>Email</h3>
                             <p>info@lladorstore.com</p>
                         </div>
+                    </div>
+                </div>
+                <div className="contact-social">
+                    <h3>Follow Us</h3>
+                    <div className="social-buttons">
+                        <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-button">
+                            <i className="fab fa-facebook"></i> Facebook
+                        </a>
+                        <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-button">
+                            <i className="fab fa-twitter"></i> Twitter
+                        </a>
+                        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-button">
+                            <i className="fab fa-instagram"></i> Instagram
+                        </a>
+                        <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="social-button whatsapp">
+                            <i className="fab fa-whatsapp"></i> WhatsApp
+                        </a>
                     </div>
                 </div>
             </section>
