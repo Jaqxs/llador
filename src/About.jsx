@@ -1,9 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './About.css';
 
 const About = () => {
     return (
         <div className="about-container">
+            <nav className="about-nav">
+                <div className="nav-brand">
+                    <Link to="/">Llador Store TZ</Link>
+                </div>
+                <div className="nav-links">
+                    <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/store" className="nav-link">Store</Link>
+                    <Link to="/about" className="nav-link active">About</Link>
+                    <Link to="/contact" className="nav-link">Contact</Link>
+                </div>
+                <div className="nav-actions">
+                    <Link to="/wishlist" className="wishlist-link">
+                        <i className="fas fa-heart"></i>
+                        <span className="wishlist-count">0</span>
+                    </Link>
+                    <Link to="/cart" className="cart-button">
+                        <i className="fas fa-shopping-cart"></i>
+                        <span className="cart-count">0</span>
+                    </Link>
+                </div>
+            </nav>
+
             <div className="about-hero">
                 <h1>About Llador Store TZ</h1>
                 <p>Your Premier Destination for Luxury Perfumes</p>
@@ -23,7 +46,7 @@ const About = () => {
                 <div className="ceo-section">
                     <div className="ceo-image-container">
                         <img 
-                            src="/images/ceo.jpg" 
+                            <img src="images/winy.jpg" 
                             alt="CEO of Llador Store TZ" 
                             className="ceo-image" 
                         />
