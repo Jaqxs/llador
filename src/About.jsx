@@ -46,12 +46,12 @@ const About = () => {
                 <div className="ceo-section">
                     <div className="ceo-image-container">
                         <img 
-                            <img src="images/winy.jpg" 
+                            src="images/winy.jpg" 
                             alt="CEO of Llador Store TZ" 
                             className="ceo-image" 
                         />
                         <div className="ceo-overlay">
-                            <h3>John Doe</h3>
+                            <h3>winy</h3>
                             <p>Founder & CEO</p>
                         </div>
                     </div>
