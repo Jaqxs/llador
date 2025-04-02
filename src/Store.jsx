@@ -11,9 +11,6 @@ const Store = () => {
     const [filter, setFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('all');
-    const [sortBy, setSortBy] = useState('featured');
     const [selectedPriceRange, setSelectedPriceRange] = useState('all');
     const [selectedRating, setSelectedRating] = useState('all');
 

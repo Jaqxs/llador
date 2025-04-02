@@ -30,21 +30,18 @@ const Admin = () => {
         averageOrderValue: 0
     });
 
+    // Load products from localStorage
     useEffect(() => {
-        // Load products and orders from localStorage
-        const savedProducts = localStorage.getItem('products');
-        const savedOrders = localStorage.getItem('orders');
-        if (savedProducts) {
-            setProducts(JSON.parse(savedProducts));
-        }
-        if (savedOrders) {
-            const parsedOrders = JSON.parse(savedOrders);
-            setOrders(parsedOrders);
-            calculateAnalytics(parsedOrders);
-        }
+        const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
+        setProducts(savedProducts);
     }, []);
 
-    const calculateAnalytics = (ordersData) => {
+    // Calculate analytics whenever products change
+    useEffect(() => {
+        calculateAnalytics();
+    }, [products, calculateAnalytics]);
+
+    const calculateAnalytics = () => {
         const totalProducts = products.length;
         const totalOrders = products.reduce((sum, product) => sum + (product.orders || 0), 0);
         const totalRevenue = products.reduce((sum, product) => sum + (product.revenue || 0), 0);
@@ -148,7 +145,7 @@ const Admin = () => {
         );
         setOrders(updatedOrders);
         localStorage.setItem('orders', JSON.stringify(updatedOrders));
-        calculateAnalytics(updatedOrders);
+        calculateAnalytics();
     };
 
     const filteredProducts = products.filter(product =>
