@@ -2,152 +2,90 @@ import React from 'react';
 import './About.css';
 
 const About = () => {
-    const socialLinks = {
-        facebook: 'https://facebook.com/lladorstore',
-        twitter: 'https://twitter.com/lladorstore',
-        instagram: 'https://instagram.com/lladorstore',
-        whatsapp: 'https://wa.me/255746718133'
-    };
-
     return (
         <div className="about-container">
-            {/* Hero Section */}
-            <section className="about-hero">
-                <div className="about-hero-content">
-                    <h1>Our Story</h1>
-                    <p>Discover the journey of Llador Store TZ</p>
-                    <div className="hero-social-links">
-                        <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-icon">
-                            <i className="fab fa-facebook"></i>
-                        </a>
-                        <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-icon">
-                            <i className="fab fa-twitter"></i>
-                        </a>
-                        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-icon">
-                            <i className="fab fa-instagram"></i>
-                        </a>
-                        <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="social-icon">
-                            <i className="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
+            <div className="about-hero">
+                <h1>About Llador Store TZ</h1>
+                <p>Your Premier Destination for Luxury Perfumes</p>
+            </div>
 
-            {/* Story Section */}
-            <section className="about-section">
-                <div className="about-content">
+            <section className="about-content">
+                <div className="about-section">
                     <h2>Our Story</h2>
-                    <p>Founded in 2024, Llador Store TZ emerged from a passion for luxury fragrances and exceptional customer service. Our journey began with a simple idea: to provide the finest perfumes to our customers while ensuring an unforgettable shopping experience.</p>
+                    <p>
+                        Founded with a passion for luxury fragrances, Llador Store TZ has become
+                        Tanzania's leading destination for premium perfumes. We curate the finest
+                        collections from around the world, bringing you an exquisite selection of
+                        scents that define elegance and sophistication.
+                    </p>
                 </div>
-            </section>
 
-            {/* Mission Section */}
-            <section className="about-section mission-section">
-                <div className="about-content">
-                    <h2>Our Mission</h2>
-                    <p>To provide our customers with the highest quality fragrances while delivering exceptional service and creating memorable shopping experiences.</p>
+                <div className="ceo-section">
+                    <div className="ceo-image-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                            alt="CEO of Llador Store TZ" 
+                            className="ceo-image" 
+                        />
+                        <div className="ceo-overlay">
+                            <h3>John Doe</h3>
+                            <p>Founder & CEO</p>
+                        </div>
+                    </div>
+                    <div className="ceo-message">
+                        <h2>Message from our CEO</h2>
+                        <blockquote>
+                            "Our mission is to bring the world's finest fragrances to Tanzania,
+                            making luxury accessible while maintaining the highest standards of
+                            quality and authenticity."
+                        </blockquote>
+                    </div>
                 </div>
-            </section>
 
-            {/* Values Section */}
-            <section className="about-section values-section">
-                <h2>Our Core Values</h2>
-                <div className="values-grid">
-                    <div className="value-card">
-                        <div className="value-icon">✨</div>
-                        <h3>Quality</h3>
-                        <p>We never compromise on the quality of our products</p>
-                    </div>
-                    <div className="value-card">
-                        <div className="value-icon">👥</div>
-                        <h3>Customer Service</h3>
-                        <p>Your satisfaction is our top priority</p>
-                    </div>
-                    <div className="value-card">
-                        <div className="value-icon">💡</div>
-                        <h3>Innovation</h3>
-                        <p>We constantly evolve to meet your needs</p>
+                <div className="values-section">
+                    <h2>Our Values</h2>
+                    <div className="values-grid">
+                        <div className="value-card">
+                            <i className="fas fa-gem"></i>
+                            <h3>Quality</h3>
+                            <p>We source only authentic, premium fragrances.</p>
+                        </div>
+                        <div className="value-card">
+                            <i className="fas fa-heart"></i>
+                            <h3>Passion</h3>
+                            <p>Our love for perfumes drives everything we do.</p>
+                        </div>
+                        <div className="value-card">
+                            <i className="fas fa-star"></i>
+                            <h3>Excellence</h3>
+                            <p>We strive for excellence in every aspect.</p>
+                        </div>
+                        <div className="value-card">
+                            <i className="fas fa-handshake"></i>
+                            <h3>Trust</h3>
+                            <p>Building lasting relationships with our customers.</p>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            {/* Team Section */}
-            <section className="about-section team-section">
-                <h2>Our Team</h2>
-                <div className="team-container">
-                    <div className="team-member">
-                        <div className="member-image-container">
-                            <img 
-                                src="/winy-ceo.jpg" 
-                                alt="Winy - CEO" 
-                                className="member-image"
-                            />
-                            <div className="member-overlay">
-                                <div className="member-social">
-                                    <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-link">
-                                        <i className="fab fa-facebook"></i>
-                                    </a>
-                                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-link">
-                                        <i className="fab fa-twitter"></i>
-                                    </a>
-                                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-link">
-                                        <i className="fab fa-instagram"></i>
-                                    </a>
-                                    <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="social-link">
-                                        <i className="fab fa-whatsapp"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="member-info">
-                            <h3>Winy</h3>
-                            <p className="member-role">Founder & CEO</p>
-                            <p className="member-bio">A visionary leader with a passion for luxury fragrances, Winy brings elegance and innovation to Llador Store TZ.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Contact Section */}
-            <section className="about-section contact-section">
-                <h2>Get in Touch</h2>
-                <div className="contact-info">
-                    <div className="contact-item">
-                        <div className="contact-icon">📍</div>
-                        <div className="contact-details">
-                            <h3>Address</h3>
-                            <p>123 Perfume Street, Dar es Salaam, Tanzania</p>
-                        </div>
-                    </div>
-                    <div className="contact-item">
-                        <div className="contact-icon">📞</div>
-                        <div className="contact-details">
-                            <h3>Phone</h3>
-                            <p>+255 746 718 133</p>
-                        </div>
-                    </div>
-                    <div className="contact-item">
-                        <div className="contact-icon">✉️</div>
-                        <div className="contact-details">
-                            <h3>Email</h3>
-                            <p>info@lladorstore.com</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="contact-social">
-                    <h3>Follow Us</h3>
-                    <div className="social-buttons">
-                        <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-button">
-                            <i className="fab fa-facebook"></i> Facebook
+                <div className="contact-section">
+                    <h2>Connect With Us</h2>
+                    <div className="social-links">
+                        <a href="https://facebook.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link facebook">
+                            <i className="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
                         </a>
-                        <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-button">
-                            <i className="fab fa-twitter"></i> Twitter
+                        <a href="https://instagram.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link instagram">
+                            <i className="fab fa-instagram"></i>
+                            <span>Instagram</span>
                         </a>
-                        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-button">
-                            <i className="fab fa-instagram"></i> Instagram
+                        <a href="https://twitter.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link twitter">
+                            <i className="fab fa-twitter"></i>
+                            <span>Twitter</span>
                         </a>
-                        <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="social-button whatsapp">
-                            <i className="fab fa-whatsapp"></i> WhatsApp
+                        <a href="https://wa.me/+255746718133" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
+                            <i className="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
                         </a>
                     </div>
                 </div>
