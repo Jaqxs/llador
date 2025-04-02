@@ -37,8 +37,7 @@ const Navigation = ({ activePage }) => {
         { path: '/', label: 'Home' },
         { path: '/store', label: 'Store' },
         { path: '/about', label: 'About' },
-        { path: '/contact', label: 'Contact' },
-        { path: '/admin', label: 'Admin' }
+        { path: '/contact', label: 'Contact' }
     ];
 
     return (
@@ -69,9 +68,6 @@ const Navigation = ({ activePage }) => {
                     <Link to="/cart" className="cart-icon" onClick={closeMobileMenu}>
                         <FaShoppingCart />
                         {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-                    </Link>
-                    <Link to="/admin" className="admin-icon" onClick={closeMobileMenu}>
-                        <FaUser />
                     </Link>
                 </div>
             </div>

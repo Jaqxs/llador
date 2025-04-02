@@ -34,7 +34,7 @@ const About = () => {
                         </div>
                         <div className="story-image animate-fade-in">
                             <img 
-                                src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                src="/winy.jpg" 
                                 alt="Our Story" 
                             />
                         </div>
