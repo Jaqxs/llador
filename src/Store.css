@@ -1,0 +1,126 @@
+.store-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.newsletter-section {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.newsletter-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.newsletter-section input[type="email"] {
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.success-message {
+    color: #28a745;
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product-card h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+}
+
+.product-card p {
+    margin: 0 0 1rem 0;
+    color: #666;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.cart-summary h3 {
+    margin: 0;
+    color: #333;
+}
+
+/* Product Modal */
+.product-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.product-details {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.product-details h2 {
+    margin: 0 0 1rem 0;
+    color: #333;
+}
+
+.product-details p {
+    margin: 0 0 1rem 0;
+    color: #666;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: #28a745;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #218838;
+} 
