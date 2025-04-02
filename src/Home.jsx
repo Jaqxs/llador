@@ -9,7 +9,6 @@ import './Home.css';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
-    const [featuredProducts, setFeaturedProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const { addToCart } = useCart();
@@ -25,10 +24,6 @@ const Home = () => {
         const loadProducts = () => {
             const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
             setProducts(savedProducts);
-            
-            // Select 3 random featured products
-            const shuffled = [...savedProducts].sort(() => 0.5 - Math.random());
-            setFeaturedProducts(shuffled.slice(0, 3));
         };
 
         loadProducts();
@@ -112,8 +107,6 @@ const Home = () => {
 
     const handleNewsletterSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const email = formData.get('email');
         // Here you would typically send this to your backend
         alert('Thank you for subscribing!');
         e.target.reset();
