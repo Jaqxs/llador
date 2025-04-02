@@ -1,74 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import '../styles/Navigation.css';
 
 const Navigation = ({ activePage }) => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [cartCount, setCartCount] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            setScrolled(window.scrollY > 50);
         };
-
-        const loadCartCount = () => {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            setCartCount(cart.length);
-        };
-
         window.addEventListener('scroll', handleScroll);
-        loadCartCount();
-
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
-
-    const closeMobileMenu = () => {
-        setIsMobileMenuOpen(false);
-    };
-
     const navLinks = [
         { path: '/', label: 'Home' },
-        { path: '/store', label: 'Store' },
-        { path: '/about', label: 'About' }
+        { path: '/about', label: 'About' },
+        { path: '/admin', label: 'Admin' }
     ];
 
     return (
-        <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
+        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="nav-container">
                 <Link to="/" className="nav-logo">
-                    Llador
+                    <span className="logo-text">Llador</span>
                 </Link>
 
-                <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
-                    {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+                <button 
+                    className="mobile-menu-btn"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {isOpen ? <FaTimes /> : <FaBars />}
                 </button>
 
-                <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
-                    {navLinks.map(link => (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
-                            onClick={closeMobileMenu}
-                        >
-                            {link.label}
-                        </Link>
+                <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
+                    {navLinks.map((link) => (
+                        <li key={link.path}>
+                            <Link
+                                to={link.path}
+                                className={location.pathname === link.path ? 'active' : ''}
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        </li>
                     ))}
-                </div>
-
-                <div className="nav-actions">
-                    <Link to="/cart" className="cart-icon" onClick={closeMobileMenu}>
-                        <FaShoppingCart />
-                        {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-                    </Link>
-                </div>
+                </ul>
             </div>
         </nav>
     );

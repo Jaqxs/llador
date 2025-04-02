@@ -10,9 +10,8 @@ const About = () => {
     const storyRef = useScrollReveal(0.3);
     const teamRef = useScrollReveal(0.3);
     const valuesRef = useScrollReveal(0.3);
-
-    // Temporary placeholder image URL
-    const placeholderImage = "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80";
+    const statsRef = useScrollReveal(0.3);
+    const missionRef = useScrollReveal(0.3);
 
     return (
         <div className="about-container">
@@ -37,10 +36,56 @@ const About = () => {
                         </div>
                         <div className="story-image animate-fade-in">
                             <img 
-                                src={placeholderImage}
+                                src="/winy.jpg"
                                 alt="Our Story" 
                                 className="story-img"
                             />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Mission Section */}
+            <section className="mission-section scroll-reveal" ref={missionRef}>
+                <div className="container">
+                    <div className="mission-content">
+                        <h2 className="text-center animate-fade-in-up">Our Mission</h2>
+                        <div className="mission-grid">
+                            <div className="mission-card animate-fade-in-up">
+                                <div className="mission-icon">🎯</div>
+                                <h3>Quality First</h3>
+                                <p>We strive to provide the highest quality fragrances that exceed our customers' expectations.</p>
+                            </div>
+                            <div className="mission-card animate-fade-in-up">
+                                <div className="mission-icon">🌍</div>
+                                <h3>Global Reach</h3>
+                                <p>Bringing Tanzanian luxury fragrances to customers worldwide.</p>
+                            </div>
+                            <div className="mission-card animate-fade-in-up">
+                                <div className="mission-icon">💝</div>
+                                <h3>Customer Focus</h3>
+                                <p>Dedicated to providing exceptional service and satisfaction to our customers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Stats Section */}
+            <section className="stats-section scroll-reveal" ref={statsRef}>
+                <div className="container">
+                    <div className="stats-grid">
+                        <div className="stat-card animate-fade-in-up">
+                            <h3>1000+</h3>
+                            <p>Happy Customers</p>
+                        </div>
+                        <div className="stat-card animate-fade-in-up">
+                            <h3>50+</h3>
+                            <p>Premium Fragrances</p>
+                        </div>
+                        <div className="stat-card animate-fade-in-up">
+                            <h3>24/7</h3>
+                            <p>Customer Support</p>
                         </div>
                     </div>
                 </div>
@@ -54,7 +99,7 @@ const About = () => {
                         <div className="team-member animate-fade-in-up">
                             <div className="member-image">
                                 <img 
-                                    src={placeholderImage}
+                                    src="/winy.jpg"
                                     alt="CEO of Llador Store TZ" 
                                     className="ceo-image"
                                 />
@@ -62,6 +107,11 @@ const About = () => {
                             <div className="member-info">
                                 <h3>Winy</h3>
                                 <p>CEO & Founder</p>
+                                <div className="social-links">
+                                    <a href="#" className="social-link">LinkedIn</a>
+                                    <a href="#" className="social-link">Twitter</a>
+                                    <a href="#" className="social-link">Instagram</a>
+                                </div>
                             </div>
                         </div>
                     </div>

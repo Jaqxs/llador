@@ -1,7 +1,8 @@
 .about-container {
     min-height: 100vh;
     background-color: #f8f9fa;
-    padding-top: 70px;
+    padding-top: 80px;
+    overflow-x: hidden;
 }
 
 /* Navigation Styles */
@@ -155,9 +156,9 @@
 
 /* Header Section */
 .about-header {
-    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
     color: white;
-    padding: 120px 0 60px;
+    padding: 6rem 0;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -170,34 +171,34 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(51, 51, 51, 0.9) 100%);
-    opacity: 0.8;
-    z-index: 1;
-}
-
-.about-header .container {
-    position: relative;
-    z-index: 2;
+    background: url('/pattern.png') repeat;
+    opacity: 0.1;
 }
 
 .about-header h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
 }
 
 .about-header p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     opacity: 0.9;
-    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
 /* Story Section */
 .story-section {
-    padding: 100px 0;
-    background: white;
+    padding: 6rem 0;
+    background: #fff;
 }
 
 .story-content {
@@ -208,25 +209,13 @@
 }
 
 .story-text h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: #1a1a1a;
-    position: relative;
-    display: inline-block;
-}
-
-.story-text h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: #1a1a1a;
+    color: #333;
 }
 
 .story-text p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.8;
     color: #666;
     margin-bottom: 1.5rem;
@@ -234,30 +223,105 @@
 
 .story-image {
     position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .story-img {
     width: 100%;
     height: auto;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: block;
     transition: transform 0.3s ease;
 }
 
 .story-img:hover {
+    transform: scale(1.05);
+}
+
+/* Mission Section */
+.mission-section {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.mission-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #333;
+    text-align: center;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.mission-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.mission-card:hover {
     transform: translateY(-10px);
+}
+
+.mission-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.mission-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.mission-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.stat-card p {
+    font-size: 1.2rem;
+    opacity: 0.9;
 }
 
 /* Team Section */
 .team-section {
-    padding: 100px 0;
-    background: #f8f9fa;
+    padding: 6rem 0;
+    background: #fff;
 }
 
 .team-section h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #1a1a1a;
+    color: #333;
     text-align: center;
 }
 
@@ -270,26 +334,17 @@
 
 .team-member {
     text-align: center;
-    max-width: 300px;
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-}
-
-.team-member:hover {
-    transform: translateY(-10px);
+    max-width: 350px;
 }
 
 .member-image {
+    position: relative;
     width: 200px;
     height: 200px;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 2rem;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border: 4px solid white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .ceo-image {
@@ -299,59 +354,63 @@
     transition: transform 0.3s ease;
 }
 
-.team-member:hover .ceo-image {
+.ceo-image:hover {
     transform: scale(1.1);
 }
 
 .member-info h3 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
-    color: #1a1a1a;
+    color: #333;
 }
 
 .member-info p {
     color: #666;
-    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #ff8e8e;
 }
 
 /* Values Section */
 .values-section {
-    padding: 100px 0;
-    background: white;
+    padding: 6rem 0;
+    background: #f8f9fa;
 }
 
 .values-section h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #1a1a1a;
+    color: #333;
     text-align: center;
 }
 
 .values-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 }
 
 .value-card {
-    background: #f8f9fa;
-    padding: 2.5rem;
-    border-radius: 20px;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.value-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #1a1a1a, #333);
-    transform: scaleX(0);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
 }
 
@@ -359,25 +418,20 @@
     transform: translateY(-10px);
 }
 
-.value-card:hover::before {
-    transform: scaleX(1);
-}
-
 .value-icon {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .value-card h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: #333;
 }
 
 .value-card p {
     color: #666;
     line-height: 1.6;
-    font-size: 1.1rem;
 }
 
 /* Contact Section */
@@ -440,33 +494,76 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
     .story-content {
-        grid-template-columns: 1fr;
         gap: 3rem;
+    }
+
+    .about-header h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-header {
+        padding: 4rem 0;
     }
 
     .about-header h1 {
         font-size: 2.5rem;
     }
 
-    .story-text h2,
-    .team-section h2,
-    .values-section h2 {
-        font-size: 2.2rem;
+    .story-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .story-text p {
-        font-size: 1.1rem;
+    .story-text h2 {
+        font-size: 2rem;
+    }
+
+    .mission-grid,
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
     }
 
     .member-image {
         width: 150px;
         height: 150px;
     }
+}
 
-    .value-card {
-        padding: 2rem;
+@media (max-width: 480px) {
+    .about-header h1 {
+        font-size: 2rem;
+    }
+
+    .about-header p {
+        font-size: 1rem;
+    }
+
+    .story-text h2,
+    .mission-content h2,
+    .team-section h2,
+    .values-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        padding: 0 1rem;
     }
 }
 
