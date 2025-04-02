@@ -84,6 +84,18 @@ const Home = () => {
         setCurrentPage(1);
     };
 
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1);
+        }
+    };
+
     const handleAddToCart = (product) => {
         addToCart(product);
         // Show feedback to user
@@ -96,6 +108,14 @@ const Home = () => {
                 button.style.backgroundColor = '#ff6b6b';
             }, 2000);
         }
+    };
+
+    const handleNewsletterSubmit = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        // Here you would typically send this to your backend
+        alert('Thank you for subscribing!');
+        e.target.reset();
     };
 
     return (
@@ -164,18 +184,27 @@ const Home = () => {
                 <div className="container">
                     <h2 className="section-title animate-fade-in-up">Shop by Category</h2>
                     <div className="categories-grid">
-                        <Link to="/store?category=women" className="category-card animate-fade-in-up">
+                        <button 
+                            onClick={() => handleCategoryChange('women')}
+                            className="category-card animate-fade-in-up"
+                        >
                             <div className="category-icon">👩</div>
                             <h3>Women's Perfumes</h3>
-                        </Link>
-                        <Link to="/store?category=men" className="category-card animate-fade-in-up">
+                        </button>
+                        <button 
+                            onClick={() => handleCategoryChange('men')}
+                            className="category-card animate-fade-in-up"
+                        >
                             <div className="category-icon">👨</div>
                             <h3>Men's Perfumes</h3>
-                        </Link>
-                        <Link to="/store?category=gifts" className="category-card animate-fade-in-up">
+                        </button>
+                        <button 
+                            onClick={() => handleCategoryChange('gifts')}
+                            className="category-card animate-fade-in-up"
+                        >
                             <div className="category-icon">🎁</div>
                             <h3>Gift Sets</h3>
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -186,9 +215,10 @@ const Home = () => {
                     <div className="newsletter-content animate-fade-in-up">
                         <h2>Subscribe to Our Newsletter</h2>
                         <p>Get updates on new products and exclusive offers</p>
-                        <form className="newsletter-form">
+                        <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
                             <input 
                                 type="email" 
+                                name="email"
                                 placeholder="Enter your email" 
                                 required 
                             />

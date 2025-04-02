@@ -302,6 +302,7 @@
     transform: translateY(20px);
     opacity: 0;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .featured-card:hover .view-button {
@@ -312,6 +313,10 @@
 .view-button:hover {
     background: #ff8e8e;
     transform: translateY(-2px);
+}
+
+.view-button:active {
+    transform: translateY(0);
 }
 
 /* Categories */
@@ -332,14 +337,20 @@
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
-    text-decoration: none;
     color: #333;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
 
 .category-card:hover {
     transform: translateY(-10px);
+}
+
+.category-card:active {
+    transform: translateY(-5px);
 }
 
 .category-icon {
@@ -456,11 +467,6 @@
         width: 100%;
     }
 
-    .featured-card {
-        margin: 0 auto;
-        max-width: 400px;
-    }
-
     .featured-overlay {
         opacity: 1;
         background: rgba(0, 0, 0, 0.3);
@@ -469,6 +475,41 @@
     .view-button {
         transform: translateY(0);
         opacity: 1;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .category-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .category-card:active {
+        transform: scale(0.98);
+    }
+
+    .newsletter-form button {
+        padding: 1rem;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+
+    .newsletter-form button:active {
+        transform: scale(0.98);
+    }
+
+    .featured-card {
+        margin: 0 auto;
+        max-width: 400px;
+        touch-action: manipulation;
+    }
+
+    .featured-image-container {
+        touch-action: manipulation;
+    }
+
+    .featured-image {
+        pointer-events: none;
     }
 }
 
