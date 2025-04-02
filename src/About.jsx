@@ -78,8 +78,8 @@ const About = () => {
                     <div className="team-member">
                         <div className="member-image-container">
                             <img 
-                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                                alt="Team Member" 
+                                src="/winy-ceo.jpg" 
+                                alt="Winy - CEO" 
                                 className="member-image"
                             />
                             <div className="member-overlay">
@@ -100,9 +100,9 @@ const About = () => {
                             </div>
                         </div>
                         <div className="member-info">
-                            <h3>John Doe</h3>
+                            <h3>Winy</h3>
                             <p className="member-role">Founder & CEO</p>
-                            <p className="member-bio">With over 15 years of experience in the fragrance industry, John leads our team with passion and expertise.</p>
+                            <p className="member-bio">A visionary leader with a passion for luxury fragrances, Winy brings elegance and innovation to Llador Store TZ.</p>
                         </div>
                     </div>
                 </div>
