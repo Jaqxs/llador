@@ -23,7 +23,7 @@ const About = () => {
                 <div className="ceo-section">
                     <div className="ceo-image-container">
                         <img 
-                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                            src="/images/ceo.jpg" 
                             alt="CEO of Llador Store TZ" 
                             className="ceo-image" 
                         />
@@ -71,19 +71,19 @@ const About = () => {
                 <div className="contact-section">
                     <h2>Connect With Us</h2>
                     <div className="social-links">
-                        <a href="https://facebook.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link facebook">
+                        <a href="https://www.facebook.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link facebook">
                             <i className="fab fa-facebook-f"></i>
                             <span>Facebook</span>
                         </a>
-                        <a href="https://instagram.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link instagram">
+                        <a href="https://www.instagram.com/llador_store_tz" target="_blank" rel="noopener noreferrer" className="social-link instagram">
                             <i className="fab fa-instagram"></i>
                             <span>Instagram</span>
                         </a>
-                        <a href="https://twitter.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link twitter">
+                        <a href="https://www.twitter.com/lladorstore" target="_blank" rel="noopener noreferrer" className="social-link twitter">
                             <i className="fab fa-twitter"></i>
                             <span>Twitter</span>
                         </a>
-                        <a href="https://wa.me/+255746718133" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
+                        <a href="https://wa.me/255746718133" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
                             <i className="fab fa-whatsapp"></i>
                             <span>WhatsApp</span>
                         </a>
